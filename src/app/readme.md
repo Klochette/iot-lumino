@@ -1,0 +1,4 @@
+-   Redux Store configuration
+-   everything related to App.tsx
+-   views
+-   react router

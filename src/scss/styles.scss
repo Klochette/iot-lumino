@@ -1,0 +1,15 @@
+// config
+@import "scss/config/reset";
+@import "scss/global/fonts";
+@import "scss/global/medias";
+@import "scss/global/mixins";
+@import "scss/global/keyframes";
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
