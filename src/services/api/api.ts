@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // Define a service using a base URL and expected endpoints
-export const chooseApiName = createApi({
-    reducerPath: "choseApiName",
+export const api = createApi({
+    reducerPath: "api",
     baseQuery: fetchBaseQuery({
         baseUrl: "",
     }),
@@ -11,4 +11,4 @@ export const chooseApiName = createApi({
     }),
 });
 
-export const endpoints = chooseApiName;
+export const endpoints = api;
