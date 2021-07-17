@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "app/store";
 import { ThemeSliceType } from "types";
 
 const initialState: ThemeSliceType = {
@@ -15,9 +14,6 @@ const switchThemeSlice = createSlice({
         },
     },
 });
-
-export const selectRoot = (state: RootState): ThemeSliceType | undefined =>
-    state.switchTheme;
 
 export const { toggleTheme } = switchThemeSlice.actions;
 
