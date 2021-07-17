@@ -1,17 +1,27 @@
 import React from "react";
 
-import Router from "app/routes/Router";
+import { ThemeProvider } from "styled-components";
 
+import Router from "app/routes/Router";
 import style from "app/App.module.scss";
 import "scss/styles.scss";
+import { darkTheme, GlobalStyle, lightTheme } from "themes";
+import { SwitchTheme } from "features/switchTheme/SwitchTheme";
+import { useAppSelector } from "./store";
 
-function App() {
-    return (
-        <div>
-            <p className={style.app}>Lumino</p>
-            <Router />
-        </div>
+const App = (): JSX.Element => {
+    const isLightMode = useAppSelector(
+        (state) => state.switchTheme.isLightMode
     );
-}
+
+    return (
+        <ThemeProvider theme={isLightMode ? lightTheme : darkTheme}>
+            <GlobalStyle />
+            <p className={style.app}>Lumino</p>
+            <SwitchTheme />
+            <Router />
+        </ThemeProvider>
+    );
+};
 
 export default App;

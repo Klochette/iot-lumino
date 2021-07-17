@@ -2,10 +2,12 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { api } from "services/api/api";
+import switchTheme from "features/switchTheme/SwitchThemeSlice";
 
 export const store = configureStore({
     reducer: {
         [api.reducerPath]: api.reducer,
+        switchTheme,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(api.middleware),
