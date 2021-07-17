@@ -1,16 +1,19 @@
 import React from "react";
 
-import Router from "app/routes/Router";
+import { ThemeProvider } from "styled-components";
 
+import Router from "app/routes/Router";
 import style from "app/App.module.scss";
 import "scss/styles.scss";
+import { darkTheme, GlobalStyle, lightTheme } from "themes";
 
 function App() {
     return (
-        <div>
+        <ThemeProvider theme={lightTheme}>
+            <GlobalStyle />
             <p className={style.app}>Lumino</p>
             <Router />
-        </div>
+        </ThemeProvider>
     );
 }
 
