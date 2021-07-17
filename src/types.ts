@@ -4,3 +4,7 @@ export type LuminoTheme = {
         warning: string;
     };
 };
+
+export type ThemeSliceType = {
+    isLightMode: boolean;
+};

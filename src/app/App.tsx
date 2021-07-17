@@ -6,15 +6,22 @@ import Router from "app/routes/Router";
 import style from "app/App.module.scss";
 import "scss/styles.scss";
 import { darkTheme, GlobalStyle, lightTheme } from "themes";
+import { SwitchTheme } from "features/switchTheme/SwitchTheme";
+import { useAppSelector } from "./store";
 
-function App() {
+const App = (): JSX.Element => {
+    const isLightMode = useAppSelector(
+        (state) => state.switchTheme.isLightMode
+    );
+
     return (
-        <ThemeProvider theme={lightTheme}>
+        <ThemeProvider theme={isLightMode ? lightTheme : darkTheme}>
             <GlobalStyle />
             <p className={style.app}>Lumino</p>
+            <SwitchTheme />
             <Router />
         </ThemeProvider>
     );
-}
+};
 
 export default App;
