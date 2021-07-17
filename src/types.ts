@@ -1,7 +1,7 @@
 export type LuminoTheme = {
     colors: {
-        success: string;
-        warning: string;
+        background: string;
+        text: string;
     };
 };
 

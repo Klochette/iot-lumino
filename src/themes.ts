@@ -3,22 +3,22 @@ import { createGlobalStyle, ThemeProps } from "styled-components";
 
 export const lightTheme: LuminoTheme = {
     colors: {
-        success: "green",
-        warning: "orange",
+        background: "white",
+        text: "black",
     },
 };
 
 export const darkTheme: LuminoTheme = {
     colors: {
-        success: "blue",
-        warning: "yellow",
+        background: "black",
+        text: "white",
     },
 };
 
 export const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${(props: ThemeProps<LuminoTheme>) =>
-        props.theme.colors.success};
-    color: ${(props: ThemeProps<LuminoTheme>) => props.theme.colors.warning};
+        props.theme.colors.background};
+    color: ${(props: ThemeProps<LuminoTheme>) => props.theme.colors.text};
   }
 `;

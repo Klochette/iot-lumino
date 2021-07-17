@@ -17,7 +17,7 @@ const App = (): JSX.Element => {
     return (
         <ThemeProvider theme={isLightMode ? lightTheme : darkTheme}>
             <GlobalStyle />
-            <p className={style.app}>Lumino</p>
+            <h1 className={style.title}>Lumino</h1>
             <SwitchTheme />
             <Router />
         </ThemeProvider>
