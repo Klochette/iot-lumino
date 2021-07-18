@@ -9,7 +9,6 @@ import clsx from "clsx";
 
 const App = (): JSX.Element => {
     const { isDarkMode } = useAppSelector((state) => state.switchTheme);
-    console.log(style);
 
     return (
         <>
