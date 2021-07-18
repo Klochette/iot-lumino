@@ -1,3 +1,4 @@
+import Navbar from "features/navbar/Navbar";
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Cgu from "./CGU/CGU";
