@@ -21,7 +21,6 @@ const userSlice = createSlice({
                 state.password = password;
                 state.error = undefined;
             } else if (identifier.includes("hetic.fr")) {
-                console.log("heeeeeeeere");
                 state.identifier = identifier
                     .split("@")[0]
                     .split(".")
