@@ -17,36 +17,46 @@ const Router = (): JSX.Element => {
         <BrowserRouter>
             <Switch>
                 <Route exact path={"/login"}>
+                    <Navbar loginPage />
                     <Login />
                 </Route>
                 <Route exact path={"/:userType/dashboard"}>
+                    <Navbar />
                     <Dashboard />
                 </Route>
                 <Route exact path={"/:userType/rooms"}>
+                    <Navbar />
                     <Rooms />
                 </Route>
                 <Route exact path={"/:userType/notifications"}>
+                    <Navbar />
                     <Notifications />
                 </Route>
                 <Route exact path={"/:userType/settings"}>
+                    <Navbar />
                     <Settings />
                 </Route>
                 <Route exact path={"/:userType/settings/account/password"}>
+                    <Navbar />
                     <ChangePassword />
                 </Route>
                 <Route exact path={"/:userType/settings/groups"}>
+                    <Navbar />
                     <EditGroups />
                 </Route>
                 <Route
                     exact
                     path={"/:userType/settings/preferences/confidentiality"}
                 >
+                    <Navbar />
                     <EditConfidentiality />
                 </Route>
                 <Route exact path={"/:userType/settings/preferences/cgu"}>
+                    <Navbar />
                     <Cgu />
                 </Route>
                 <Route>
+                    <Navbar />
                     <NotFound />
                 </Route>
             </Switch>
