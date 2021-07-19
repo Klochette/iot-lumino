@@ -1,1 +1,9 @@
 // keyframes
+@keyframes accordion {
+    from {
+        height: auto;
+    }
+    to {
+        height: 0;
+    }
+}

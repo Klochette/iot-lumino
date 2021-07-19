@@ -17,7 +17,7 @@ a {
 button {
     border: none;
     border-radius: 9px;
-    height: 30px;
+    height: 24px;
     @include text-style($grey-dark);
 }
 
@@ -25,8 +25,11 @@ h1 {
     @include h1-style($grey-dark);
 }
 
+h2 {
+    @include h2-style($grey-dark);
+}
+
 input {
-    background-color: $grey-light;
     border: 1px solid $grey-dark;
     border-radius: 9px;
     height: 30px;
