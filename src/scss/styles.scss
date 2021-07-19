@@ -13,3 +13,33 @@ a {
 * {
     box-sizing: border-box;
 }
+
+button {
+    border: none;
+    border-radius: 9px;
+    height: 30px;
+    @include text-style($grey-dark);
+}
+
+h1 {
+    @include h1-style($grey-dark);
+}
+
+input {
+    background-color: $grey-light;
+    border: 1px solid $grey-dark;
+    border-radius: 9px;
+    height: 30px;
+    @include text-style($grey-dark);
+    color: $grey-dark;
+    padding: 10px;
+}
+
+label {
+    @include text-style($grey-dark);
+    color: $grey-dark;
+}
+
+p {
+    @include text-style($grey-dark);
+}

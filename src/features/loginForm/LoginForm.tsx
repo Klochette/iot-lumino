@@ -3,6 +3,7 @@ import { login, setUserError } from "features/user/userSlice";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import styles from "features/loginForm/LoginForm.module.scss";
 
 const LoginForm = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -34,12 +35,34 @@ const LoginForm = (): JSX.Element => {
     };
 
     return (
-        <>
+        <div className={styles.form}>
             {error && <p>{error}</p>}
-            <input type="email" required onBlur={onAddIdentifier} />
-            <input type="text" required onBlur={onAddPassword} />
-            <button onClick={onLoginSubmit}>connecte toi</button>
-        </>
+            <div className={styles.inputWithLabel}>
+                <label htmlFor="email">Email</label>
+                <input
+                    name="email"
+                    type="email"
+                    required
+                    onBlur={onAddIdentifier}
+                    className={styles.input}
+                />
+            </div>
+            <div className={styles.inputWithLabel}>
+                <label htmlFor="password" className={styles.label}>
+                    Mot de passe
+                </label>
+                <input
+                    name="password"
+                    type="text"
+                    required
+                    onBlur={onAddPassword}
+                    className={styles.input}
+                />
+            </div>
+            <button onClick={onLoginSubmit} className={styles.button}>
+                Se connecter
+            </button>
+        </div>
     );
 };
 
