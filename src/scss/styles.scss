@@ -18,11 +18,11 @@ button {
     border: none;
     border-radius: 9px;
     height: 24px;
-    font-family: "Silka";
+    font-family: $font-family;
 }
 
 p {
-    font-family: "Silka";
+    @include p-style;
 }
 
 h1 {
