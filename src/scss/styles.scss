@@ -13,3 +13,18 @@ a {
 * {
     box-sizing: border-box;
 }
+
+button {
+    border: none;
+    border-radius: 9px;
+    height: 24px;
+    font-family: "Silka";
+}
+
+p {
+    font-family: "Silka";
+}
+
+h1 {
+    @include h1-style;
+}

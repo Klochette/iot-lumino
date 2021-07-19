@@ -1,1 +1,16 @@
 // mixins
+@import "./variables";
+
+@mixin text-style {
+    font-family: $font-family;
+}
+
+@mixin h1-style {
+    @include text-style;
+    font-size: 24px;
+}
+
+@mixin p-style {
+    @include text-style;
+    font-size: 10px;
+}
