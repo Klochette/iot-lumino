@@ -21,10 +21,4 @@ button {
     font-family: $font-family;
 }
 
-p {
-    @include p-style;
-}
 
-h1 {
-    @include h1-style;
-}
