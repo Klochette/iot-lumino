@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userSliceType } from "types";
 
-const initialState: userSliceType = {};
+const initialState: userSliceType = {
+    userType: "student",
+    email: "eee",
+    identifier: "Nawel Borrini",
+    password: "gogog",
+};
 
 const userSlice = createSlice({
     name: "userSlice",
@@ -20,6 +25,7 @@ const userSlice = createSlice({
                 state.userType = "student";
                 state.password = password;
                 state.error = undefined;
+                state.email = identifier;
             } else if (identifier.includes("hetic.fr")) {
                 state.identifier = identifier
                     .split("@")[0]
@@ -28,6 +34,7 @@ const userSlice = createSlice({
                 state.userType = "admin";
                 state.password = password;
                 state.error = undefined;
+                state.email = identifier;
             } else {
                 state.error = "Wrong email";
             }

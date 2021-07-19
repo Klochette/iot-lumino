@@ -1,6 +1,8 @@
+import { useAppSelector } from "app/store";
+import PrivateRoute from "commons/PrivateRoute/PrivateRoute";
 import Navbar from "features/navbar/Navbar";
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Cgu from "./CGU/CGU";
 import ChangePassword from "./changePassword/ChangePassword";
 import Dashboard from "./dashboard/Dashboard";
@@ -13,51 +15,68 @@ import Rooms from "./rooms/Rooms";
 import Settings from "./settings/Settings";
 
 const Router = (): JSX.Element => {
+    const { userType } = useAppSelector((state) => state.user);
     return (
         <BrowserRouter>
+            <Navbar />
             <Switch>
                 <Route exact path={"/login"}>
-                    <Navbar loginPage />
-                    <Login />
+                    {userType ? (
+                        <Redirect to={`${userType}/dashboard`} />
+                    ) : (
+                        <Login />
+                    )}
                 </Route>
-                <Route exact path={"/:userType/dashboard"}>
-                    <Navbar />
-                    <Dashboard />
+                <Route path={"/:userType/dashboard"}>
+                    <PrivateRoute
+                        userType={userType}
+                        component={<Dashboard />}
+                    />
                 </Route>
-                <Route exact path={"/:userType/rooms"}>
-                    <Navbar />
-                    <Rooms />
+                <Route path={"/:userType/rooms"}>
+                    <PrivateRoute userType={userType} component={<Rooms />} />
                 </Route>
                 <Route exact path={"/:userType/notifications"}>
-                    <Navbar />
-                    <Notifications />
+                    <PrivateRoute
+                        userType={userType}
+                        component={<Notifications />}
+                    />
                 </Route>
                 <Route exact path={"/:userType/settings"}>
-                    <Navbar />
-                    <Settings />
+                    <PrivateRoute
+                        userType={userType}
+                        component={<Settings />}
+                    />
                 </Route>
                 <Route exact path={"/:userType/settings/account/password"}>
-                    <Navbar />
-                    <ChangePassword />
+                    <PrivateRoute
+                        userType={userType}
+                        component={<ChangePassword />}
+                    />
                 </Route>
                 <Route exact path={"/:userType/settings/groups"}>
-                    <Navbar />
-                    <EditGroups />
+                    <PrivateRoute
+                        userType={userType}
+                        component={<EditGroups />}
+                    />
                 </Route>
                 <Route
                     exact
                     path={"/:userType/settings/preferences/confidentiality"}
                 >
-                    <Navbar />
-                    <EditConfidentiality />
+                    <PrivateRoute
+                        userType={userType}
+                        component={<EditConfidentiality />}
+                    />
                 </Route>
                 <Route exact path={"/:userType/settings/preferences/cgu"}>
-                    <Navbar />
-                    <Cgu />
+                    <PrivateRoute userType={userType} component={<Cgu />} />
+                </Route>
+                <Route exact path={"/notFound"}>
+                    <NotFound />
                 </Route>
                 <Route>
-                    <Navbar />
-                    <NotFound />
+                    <Redirect to="/notFound" />
                 </Route>
             </Switch>
         </BrowserRouter>
