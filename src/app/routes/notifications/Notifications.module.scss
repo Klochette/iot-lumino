@@ -1,0 +1,33 @@
+@import "../../../scss/global/variables";
+@import "../../../scss/global/mixins";
+
+.notifications {
+    height: 90vh;
+    position: relative;
+    //Mettre la bonne couleur
+    background-color: $grey-light;
+
+    .title {
+        @include h1-style-stroke($text);
+    }
+
+    .contentContainer {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 230px;
+    }
+
+    .leaf {
+        margin-bottom: 30px;
+        width: 80px;
+        height: auto;
+    }
+
+    .textNoNotification {
+        @include h2-style($grey-dark);
+        line-height: 140%;
+    }
+}
