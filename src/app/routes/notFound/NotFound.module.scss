@@ -1,0 +1,39 @@
+@import "../../../scss/global/variables";
+
+section {
+    text-align: center;
+    height: 90vh;
+    position: relative;
+    //Mettre la bonne couleur
+    background-color: $grey-light;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.images {
+    display: flex;
+    align-items: center;
+
+    .logoLumino {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.text_bold {
+    -webkit-text-stroke: 1px black;
+    letter-spacing: 0.3px;
+    margin-bottom: 5px;
+    // A REMPLACER PAR MIXIN
+    font-size: 18px;
+}
+
+.text_normal {
+    // A REMPLACER PAR MIXIN
+    font-size: 18px;
+}
