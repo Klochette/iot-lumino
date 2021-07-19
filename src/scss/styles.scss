@@ -17,8 +17,30 @@ a {
 button {
     border: none;
     border-radius: 9px;
-    height: 24px;
+    height: 30px;
     font-family: $font-family;
 }
 
 
+<<<<<<< HEAD
+=======
+h1 {
+    @include h1-style;
+}
+
+input {
+    background-color: $grey-light;
+    border: 1px solid $grey-dark;
+    border-radius: 9px;
+    height: 30px;
+    @include text-style;
+    color: $grey-dark;
+    padding: 10px;
+}
+
+label {
+    @include text-style;
+    font-size: 10px;
+    color: $grey-dark;
+}
+>>>>>>> 8a43577803b54de5995003c7eaf8f0e64560a669

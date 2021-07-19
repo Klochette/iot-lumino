@@ -1,4 +1,40 @@
+@import "../../scss/global/variables";
+
 .form {
     display: flex;
     flex-direction: column;
+    width: 208px;
+}
+
+.button {
+    background-color: #feca28;
+    margin-top: 20px;
+}
+
+.input {
+    &WithLabel {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        height: 40px;
+
+        label {
+            z-index: 1;
+            position: absolute;
+            left: 11px;
+            background-color: $grey-light;
+            padding: 0 5px;
+        }
+
+        input {
+            position: absolute;
+            z-index: 0;
+            top: 4px;
+            width: 100%;
+        }
+    }
+}
+
+.label {
+    padding-bottom: -10px;
 }
