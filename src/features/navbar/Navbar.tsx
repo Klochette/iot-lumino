@@ -5,31 +5,20 @@ import styles from "./Navbar.module.scss";
 import clsx from "clsx";
 import { logout } from "features/user/userSlice";
 import { Link } from "react-router-dom";
+import { ReactComponent as Home } from "assets/images/bytesize_home.svg";
+import { ReactComponent as User } from "assets/images/carbon_user-filled.svg";
+import { ReactComponent as Alert } from "assets/images/fluent_alert-24-filled.svg";
+import { ReactComponent as Door } from "assets/images/fluent_conference-room-24-filled.svg";
 
-type NavbarProps = {
-    loginPage?: boolean;
-};
-
-const Navbar = ({ loginPage }: NavbarProps): JSX.Element => {
-    const dispatch = useAppDispatch();
+const Navbar = (): JSX.Element => {
     const { isDarkMode } = useAppSelector((state) => state.switchTheme);
 
-    const onLogout = () => {
-        dispatch(logout());
-    };
-
     return (
-        <div className={clsx(styles.navbar, isDarkMode && styles.dark)}>
-            <div className={styles.switch}>
-                🌞
-                <SwitchTheme />
-                🌙
-            </div>
-            {!loginPage && (
-                <Link to={"/login"}>
-                    <button onClick={onLogout}>Logout</button>
-                </Link>
-            )}
+        <div className={styles.navbar}>
+            <Home />
+            <Door />
+            <Alert />
+            <User />
         </div>
     );
 };

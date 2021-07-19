@@ -17,7 +17,6 @@ const Router = (): JSX.Element => {
         <BrowserRouter>
             <Switch>
                 <Route exact path={"/login"}>
-                    <Navbar loginPage />
                     <Login />
                 </Route>
                 <Route exact path={"/:userType/dashboard"}>
