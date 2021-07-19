@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "app/store";
-import { SwitchTheme } from "features/switchTheme/SwitchTheme";
+import SwitchTheme from "features/switchTheme/SwitchTheme";
 import React from "react";
 import styles from "./Navbar.module.scss";
 import clsx from "clsx";
