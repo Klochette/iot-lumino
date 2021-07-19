@@ -18,14 +18,11 @@ button {
     border: none;
     border-radius: 9px;
     height: 30px;
-    font-family: $font-family;
+    @include text-style($grey-dark);
 }
 
-
-<<<<<<< HEAD
-=======
 h1 {
-    @include h1-style;
+    @include h1-style($grey-dark);
 }
 
 input {
@@ -33,14 +30,16 @@ input {
     border: 1px solid $grey-dark;
     border-radius: 9px;
     height: 30px;
-    @include text-style;
+    @include text-style($grey-dark);
     color: $grey-dark;
     padding: 10px;
 }
 
 label {
-    @include text-style;
-    font-size: 10px;
+    @include text-style($grey-dark);
     color: $grey-dark;
 }
->>>>>>> 8a43577803b54de5995003c7eaf8f0e64560a669
+
+p {
+    @include text-style($grey-dark);
+}

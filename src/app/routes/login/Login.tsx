@@ -15,7 +15,7 @@ const Login = (): JSX.Element => {
             />
             <LoginForm />
             <div className={styles.credits}>
-                <LuminoLogo />
+                <LuminoLogo className={styles.luminoLogo} />
                 <NexusLogo />
                 <p>Made with 💛&nbsp;&nbsp; by Lumino</p>
             </div>
