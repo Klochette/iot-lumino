@@ -9,4 +9,5 @@ export type userSliceType = {
     identifier?: string;
     userType?: UserType;
     error?: string;
+    email?: string;
 };

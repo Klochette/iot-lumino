@@ -33,7 +33,7 @@ const Router = (): JSX.Element => {
                     <Notifications />
                 </Route>
                 <Route exact path={"/:userType/settings"}>
-                    <Navbar />
+                    
                     <Settings />
                 </Route>
                 <Route exact path={"/:userType/settings/account/password"}>
