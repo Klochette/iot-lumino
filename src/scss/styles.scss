@@ -28,3 +28,19 @@ p {
 h1 {
     @include h1-style;
 }
+
+input {
+    background-color: $grey-light;
+    border: 1px solid $grey-dark;
+    border-radius: 9px;
+    height: 30px;
+    @include text-style;
+    color: $grey-dark;
+    padding: 10px;
+}
+
+label {
+    @include text-style;
+    font-size: 10px;
+    color: $grey-dark;
+}
