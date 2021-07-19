@@ -3,6 +3,8 @@
 .section {
     padding: 21px;
     background-color: $grey-background;
+    min-height: 100vh;
+    height: auto;
 }
 
 .accordion {
