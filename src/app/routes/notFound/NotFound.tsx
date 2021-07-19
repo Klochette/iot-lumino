@@ -5,7 +5,7 @@ import { ReactComponent as Four } from "assets/images/fourYB.svg";
 
 const NotFound = (): JSX.Element => {
     return (
-        <section>
+        <section className={styles.notFound}>
             <div className={styles.container}>
                 <div className={styles.images}>
                     <Four className={styles.four} />
