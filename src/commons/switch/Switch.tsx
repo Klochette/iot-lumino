@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
 import style from "commons/switch/Switch.module.scss";
 import clsx from "clsx";
 
 type SwitchType = {
-    isChecked: boolean;
-    onSwitch?: (e: React.MouseEvent<HTMLInputElement>) => void;
+    onSwitch?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Switch = ({ onSwitch, isChecked }: SwitchType): JSX.Element => {
+const Switch = ({ onSwitch }: SwitchType): JSX.Element => {
     return (
         <label className={style.switch}>
-            <input type="checkbox" onClick={onSwitch} checked={isChecked} />
+            <input type="checkbox" onChange={onSwitch} />
             <span className={clsx(style.slider, style.round)}></span>
         </label>
     );
