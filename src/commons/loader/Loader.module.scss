@@ -1,0 +1,44 @@
+@import "../../scss/styles.scss";
+
+.loading {
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    width: 100px;
+    transform: translate(-50%, -50%) rotate(45deg) translate3d(0, 0, 0);
+    animation: animate 1.2s ease-in-out infinite;
+    span {
+        position: absolute;
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        animation: rotate 1.2s linear both infinite;
+
+        &:nth-child(1) {
+            top: 0;
+            left: 0;
+            background: $green-light;
+        }
+
+        &:nth-child(2) {
+            top: 0;
+            right: 0;
+            background: $blue_light;
+        }
+
+        &:nth-child(3) {
+            bottom: 0;
+            left: 0;
+            background: $peach;
+        }
+
+        &:nth-child(4) {
+            bottom: 0;
+            right: 0;
+            background: $yellow;
+        }
+    }
+}

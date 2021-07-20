@@ -6,13 +6,13 @@ import styles from "app/routes/rooms/Rooms.module.scss";
 
 import RoomsList from "features/roomsList/RoomsList";
 import ButtonChecked from "commons/buttonChecked/ButtonChecked";
+import Loader from "commons/loader/Loader";
 
 const Rooms = (): JSX.Element => {
     const [filter, setFilter] = useState<FilterType>();
 
     const handleFilterClick = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
-        console.log(value, filter);
         if (value === "free" && filter !== "isBooked") setFilter("isBooked");
         else if (
             value === filter ||

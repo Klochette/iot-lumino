@@ -8,6 +8,7 @@ import { useApiRoomsQuery } from "services/api/api";
 import RoomCard from "features/roomsList/RoomCard";
 
 import styles from "features/roomsList/RoomsList.module.scss";
+import Loader from "commons/loader/Loader";
 
 type RoomsListType = {
     filter: FilterType | undefined;
@@ -51,7 +52,7 @@ const RoomsList = ({ filter }: RoomsListType): JSX.Element => {
 
     return (
         <div className={styles.roomsList}>
-            {isLoading && <p>LOADING</p>}
+            {isLoading && <Loader />}
             {filter &&
                 getKeys.map((key) => (
                     <div key={key}>
@@ -76,7 +77,7 @@ const RoomsList = ({ filter }: RoomsListType): JSX.Element => {
                         <RoomCard room={room} />
                     </div>
                 ))}
-            {filter && getKeys.length === 0 && (
+            {filter && getKeys.length === 0 && !isLoading && (
                 <p>Il n'y a pas de salles avec ce filtre.</p>
             )}
         </div>

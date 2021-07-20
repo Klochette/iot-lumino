@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import styles from "./Settings.module.scss";
 import { ReactComponent as Pdp } from "assets/images/pdp.svg";
 import { useAppSelector } from "app/store";
@@ -16,8 +15,6 @@ import { ReactComponent as CGUSvg } from "assets/images/cgu-svg.svg";
 import { ReactComponent as ConfSvg } from "assets/images/config-svg.svg";
 
 const Settings = (): JSX.Element => {
-    const { userType } = useParams<{ userType?: "student" | "admin" }>();
-    console.log(userType);
     const { identifier, email } = useAppSelector((state) => state.user);
     return (
         <section className={styles.container}>
