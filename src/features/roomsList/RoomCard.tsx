@@ -1,20 +1,38 @@
 import React, { useState } from "react";
-import styles from "./RoomCard.module.scss";
-import { ReactComponent as ArrowUp } from "assets/images/bi_three-dots.svg";
+
 import clsx from "clsx";
+
+import { RoomType } from "types";
+
 import {
-    useApiBookARoomMutation,
     useApiBookingFromARoomQuery,
+    useApiGetBokingByRoomIdQuery,
 } from "services/api/api";
 
-//type RoomProps = { room: RoomType };
-type RoomProps = { room: any };
+import styles from "features/roomsList/RoomCard.module.scss";
+
+import { ReactComponent as ArrowUp } from "assets/images/bi_three-dots.svg";
+import { ReactComponent as ArrowDown } from "assets/images/arrowDown.svg";
+
+type RoomProps = { room: RoomType };
 
 const RoomCard = ({ room }: RoomProps): JSX.Element => {
-    const { nameRoom, nbPlace, isBooked, freeAccess } = room;
     const [isOpen, setOpen] = useState(false);
+
+    const { nameRoom, nbPlace, freeAccess, isBooked, id_room } = room;
+
     const { data, isLoading } = useApiBookingFromARoomQuery(nameRoom);
-    //const [bookARoom] = useApiBookARoomMutation();
+    const { data: roomBooking, isLoading: roomBookingLoading } =
+        useApiGetBokingByRoomIdQuery(id_room);
+
+    const getIsFull = () => {
+        if (roomBooking && roomBooking.data)
+            for (const key in roomBooking.data) {
+                if (roomBooking.data[key] === true) return true;
+            }
+    };
+    const isFull = getIsFull();
+
     const addColor = () => {
         if (freeAccess) {
             return "yellow";
@@ -26,21 +44,6 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
             }
         }
     };
-
-    /* const bookARoomFunction = async () => {
-        try {
-            const args = {
-                start: "8",
-                end: "9",
-                nameRoom,
-                studentEmail: "nawel.berrichi@hetic.net",
-            };
-            const bookedRoomFunction = await bookARoom(args).unwrap();
-            console.log(bookedRoomFunction);
-        } catch (error) {
-            console.log(error);
-        }
-    }; */
 
     return (
         <div className={styles.accordion}>
@@ -55,7 +58,8 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                 <h2>{nameRoom}</h2>
                 <div className={clsx(styles.endIcons, styles[addColor()])}>
                     <h2>?/{nbPlace}</h2>
-                    <ArrowUp />
+                    {isOpen && <ArrowUp className={styles.icon} />}
+                    {!isOpen && <ArrowDown />}
                 </div>
             </div>
             <div
@@ -84,9 +88,14 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                                             {booking.end}h
                                         </li>
                                     ))}
-                                {isLoading && <p>Loading</p>}
+                                {isLoading && roomBookingLoading && (
+                                    <p>Loading</p>
+                                )}
                             </ul>
-                            <button className={styles[addColor()]}>
+                            <button
+                                className={styles[addColor()]}
+                                disabled={isFull}
+                            >
                                 Réserver
                             </button>
                         </>

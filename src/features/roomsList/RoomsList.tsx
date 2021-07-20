@@ -1,9 +1,13 @@
 import React from "react";
-import styles from "./RoomsList.module.scss";
-import { useApiRoomsQuery } from "services/api/api";
+
 import { skipToken } from "@reduxjs/toolkit/dist/query";
+
 import { FilterType, RoomType } from "types";
-import RoomCard from "./RoomCard";
+
+import { useApiRoomsQuery } from "services/api/api";
+import RoomCard from "features/roomsList/RoomCard";
+
+import styles from "features/roomsList/RoomsList.module.scss";
 
 type RoomsListType = {
     filter: FilterType | undefined;
@@ -51,12 +55,12 @@ const RoomsList = ({ filter }: RoomsListType): JSX.Element => {
             {filter &&
                 getKeys.map((key) => (
                     <div key={key}>
-                        {filter === "building" && <h2>Bâtiment {key}</h2>}
-                        {filter === "freeAccess" && (
-                            <h2>Salles à accès libre</h2>
-                        )}
-                        {filter === "isBooked" && <h2>Salles libres</h2>}
-                        {filteredRooms[key].map((room: any) => {
+                        <h2 className={styles.filterName}>
+                            {filter === "building" && `Bâtiment ${key}`}
+                            {filter === "freeAccess" && "Salles à accès libre"}
+                            {filter === "isBooked" && "Salles libres"}
+                        </h2>
+                        {filteredRooms[key].map((room: RoomType) => {
                             return (
                                 <div key={room.id_room}>
                                     <RoomCard room={room} />
@@ -67,13 +71,13 @@ const RoomsList = ({ filter }: RoomsListType): JSX.Element => {
                 ))}
             {!filter &&
                 data &&
-                data.data.map((room: any) => (
+                data.data.map((room: RoomType) => (
                     <div key={room.id_room}>
                         <RoomCard room={room} />
                     </div>
                 ))}
             {filter && getKeys.length === 0 && (
-                <p>Il n'y a pas de salle avec ce filtre</p>
+                <p>Il n'y a pas de salles avec ce filtre.</p>
             )}
         </div>
     );

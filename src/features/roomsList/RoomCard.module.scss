@@ -98,6 +98,11 @@
                 background-color: $peach;
                 color: $text-red;
             }
+
+            &:disabled {
+                background-color: $grey-background;
+                color: $grey-light;
+            }
         }
 
         .items {

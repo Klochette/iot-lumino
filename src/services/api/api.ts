@@ -21,12 +21,16 @@ export const api = createApi({
                 body: queryArg,
             }),
         }),
+        apiGetBokingByRoomId: builder.query({
+            query: (roomId) => `/getBookingByRoomId/${roomId}`,
+        }),
     }),
 });
 
 export const {
     useApiRoomsQuery,
     useApiBookingFromARoomQuery,
+    useApiGetBokingByRoomIdQuery,
     //POST
     useApiBookARoomMutation,
 } = api;

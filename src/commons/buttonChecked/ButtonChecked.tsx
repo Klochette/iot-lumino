@@ -1,6 +1,9 @@
 import React from "react";
-import styles from "./ButtonChecked.module.scss";
+
 import clsx from "clsx";
+
+import styles from "commons/buttonChecked/ButtonChecked.module.scss";
+
 import { ReactComponent as CheckedIcon } from "assets/images/checkedIcon.svg";
 
 type ButtonCheckedType = {
