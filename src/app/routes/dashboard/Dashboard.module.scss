@@ -2,8 +2,9 @@
 @import "../../../scss/global/mixins";
 
 .homeSection {
-    height: 100vh;
+    min-height: 100vh;
     background-color: $grey-background;
+    padding-bottom: 50px;
 }
 
 /** HEADER **/

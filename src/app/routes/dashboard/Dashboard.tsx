@@ -4,8 +4,29 @@ import { ReactComponent as ProfilPicture } from "assets/images/profil_pic-nexus.
 import { ReactComponent as CloseIcon } from "assets/images/close-circle.svg";
 import { ReactComponent as Leaf } from "assets/images/leafNotification.svg";
 import { ReactComponent as Chevron } from "assets/images/bi_three-dots.svg";
+import { useApiRoomsQuery } from "services/api/api";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
+import Loader from "commons/loader/Loader";
+import ModalDelete from "features/modalDelete/ModalDelete";
+import { useState } from "react";
 
 const Dashboard = (): JSX.Element => {
+    const { data: rooms, isLoading: isLoadingRooms } =
+        useApiRoomsQuery(skipToken);
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        if (!open) {
+            setOpen(true);
+        }
+    };
+
+    const handleClose = () => {
+        if (open) {
+            setOpen(false);
+        }
+    };
+
     return (
         <section className={styles.homeSection}>
             <header className={styles.headerHome}>
@@ -25,7 +46,10 @@ const Dashboard = (): JSX.Element => {
                 <div className={styles.containerBookedRoom}>
                     <div className={styles.bookedRoomImg}>
                         <p>A105</p>
-                        <CloseIcon className={styles.closeIcon} />
+                        <CloseIcon
+                            className={styles.closeIcon}
+                            onClick={handleOpen}
+                        />
                     </div>
                     <div className={styles.rightSide}>
                         <div className={styles.pictoGroupe}>
@@ -40,30 +64,33 @@ const Dashboard = (): JSX.Element => {
 
             {/* SALLE DIPONNIBLE A LA RESA */}
             <div className={styles.cardHome}>
-                <div>
-                    <h2>Salles disponnibles à la réservation</h2>
-                    <Chevron className={styles.chevron} />
-                </div>
-                <div className={styles.containerAvailableRoom}>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                </div>
+                {!isLoadingRooms && (
+                    <>
+                        <div>
+                            <h2>Salles disponnibles à la réservation</h2>
+                            <Chevron className={styles.chevron} />
+                        </div>
+                        <div className={styles.containerAvailableRoom}>
+                            {rooms &&
+                                rooms.data.map((room) => {
+                                    return (
+                                        <div key={room.id_room}>
+                                            {!room.isBooked && (
+                                                <div
+                                                    className={
+                                                        styles.availableRoom
+                                                    }
+                                                >
+                                                    <p>{room.nameRoom}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    </>
+                )}
+                {isLoadingRooms && <Loader />}
             </div>
 
             {/* AUCUNE SALLE RESERVEE */}
@@ -87,6 +114,9 @@ const Dashboard = (): JSX.Element => {
                     Ajouter un groupe
                 </button>
             </div>
+            {open && rooms && (
+                <ModalDelete onClick={handleClose} room={rooms.data[0]} />
+            )}
         </section>
     );
 };

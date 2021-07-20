@@ -6,7 +6,6 @@ import styles from "app/routes/rooms/Rooms.module.scss";
 
 import RoomsList from "features/roomsList/RoomsList";
 import ButtonChecked from "commons/buttonChecked/ButtonChecked";
-import Loader from "commons/loader/Loader";
 
 const Rooms = (): JSX.Element => {
     const [filter, setFilter] = useState<FilterType>();
