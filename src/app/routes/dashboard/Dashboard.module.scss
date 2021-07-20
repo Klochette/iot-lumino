@@ -6,6 +6,8 @@
     background-color: $grey-background;
 }
 
+/** HEADER **/
+
 .headerHome {
     width: 100vw;
     display: flex;
@@ -32,13 +34,15 @@
     }
 }
 
-.bookedRoom {
+/** SALLE RESERVEE **/
+
+.cardHome {
     background-color: $white;
     border-radius: 9px;
     width: 86vw;
     height: auto;
-    margin: auto;
-    padding: 8px;
+    margin: 0 auto 14px auto;
+    padding: 8px 14px;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.09);
 
     h2 {
@@ -49,6 +53,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding-left: 4px;
 
         .bookedRoomImg {
             width: 55px;
@@ -104,6 +109,71 @@
                 border-radius: 20px;
                 cursor: pointer;
             }
+        }
+    }
+}
+
+/** AUCUNE SALLE RESERVEE **/
+/** AUCUN GROUPE **/
+/** SAME STYLE **/
+
+.whiteCard {
+    background-color: $white;
+    border-radius: 9px;
+    width: 86vw;
+    height: auto;
+    margin: 0 auto 14px auto;
+    padding: 14px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.09);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .leaf {
+        width: 30px;
+        height: auto;
+        margin-bottom: 8px;
+    }
+
+    .whiteCardTitle {
+        @include h2-style($text-blue);
+        margin-bottom: 14px;
+        text-align: center;
+    }
+
+    .whiteCardButton {
+        background-color: $blue-grey;
+        width: auto;
+        padding: 5px 30px;
+        color: $white;
+        font-size: 10px;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+}
+
+/**  **/
+
+.containerAvailableRoom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 4px;
+
+    .availableRoom {
+        width: 55px;
+        height: 55px;
+        background-color: $green-dark;
+        border-radius: 9px;
+        position: relative;
+
+        p {
+            @include h2-style($blue-grey);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
     }
 }
