@@ -5,72 +5,18 @@
     background-color: $grey-background;
     min-height: 100vh;
     height: auto;
-}
 
-.accordion {
+    .filters {
+        margin: 8px 0 16px 0;
+        display: flex;
+    }
+
     .title {
-        display: flex;
-        border-radius: 9px;
-        justify-content: space-between;
-        align-items: center;
-        padding: 6px 12px;
-        cursor: pointer;
-        transition: border-radius 0.7s ease-in;
-
-        &.green {
-            background-color: $green-dark;
-            color: $text-green;
-        }
-
-        &.isOpen {
-            border-radius: 9px 9px 0 0;
-            transition: border-radius 0.7s ease-out;
-        }
+        margin-bottom: 16px;
+        color: $text-blue;
     }
 
-    .endIcons {
-        display: flex;
-        align-items: center;
-    }
-
-    .content {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        background-color: $white;
-        max-height: 0;
-        border-radius: 0 0 9px 9px;
-        overflow: hidden;
-        transition: all 1s cubic-bezier(0, 1, 0, 1);
-
-        &.green {
-            border: 0px solid $green-dark;
-        }
-
-        &.collapsed {
-            max-height: 9999px;
-            transition: all 1s cubic-bezier(1, 0, 1, 0);
-
-            &.green {
-                border: 1px solid $green-dark;
-            }
-        }
-
-        button {
-            width: 60%;
-            margin-top: 14px;
-
-            &.green {
-                background-color: $green-dark;
-            }
-        }
-
-        .items {
-            margin: 12px 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
+    .filterTitle {
+        color: $text-blue;
     }
 }
