@@ -31,3 +31,72 @@
         line-height: 140%;
     }
 }
+.notificationNew {
+    h2 {
+        @include h2-style($text);
+        margin: 0 0 14px 20px;
+    }
+
+    .notificationCard {
+        width: auto;
+        height: auto;
+        background-color: $white;
+        margin: 0 20px 22px 20px;
+        padding: 15px 10px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.09);
+    }
+
+    .cardRoom {
+        width: 45px;
+        height: 45px;
+        background-color: $green-dark;
+        border-radius: 9px;
+        position: relative;
+
+        p {
+            @include h2-style($text-green);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .cardRightBlock {
+        width: 80%;
+
+        .cardMessage {
+            @include text-style($text);
+            padding-bottom: 5px;
+        }
+
+        .cardTime {
+            @include text-style($blue_light);
+        }
+    }
+
+    .cardDots {
+        position: absolute;
+        bottom: 3px;
+        right: 10px;
+    }
+}
+
+.notificationOld {
+    display: flex;
+    align-items: center;
+
+    h2 {
+        @include h2-style($text);
+        margin: 0 0 0 20px;
+    }
+
+    .chevron {
+        color: $grey-dark;
+    }
+}
