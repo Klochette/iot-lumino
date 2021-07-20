@@ -1,9 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {
-    BookARoomType,
-    BookingFromARoomQueryType,
-    QueryARoomType,
-} from "types";
+import { BookARoomType, BookingFromARoomQueryType, QueryRoomType } from "types";
 
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
@@ -12,12 +8,14 @@ export const api = createApi({
         baseUrl: "https://api-oit.herokuapp.com",
     }),
     endpoints: (builder) => ({
-        apiRooms: builder.query<QueryARoomType, undefined>({
+        apiRooms: builder.query<QueryRoomType, undefined>({
             query: () => `/getAllRoom`,
         }),
-        apiBookingFromARoom: builder.query<BookingFromARoomQueryType, string>({
-            query: (roomName) => `/getAllBookingFromARoom/${roomName}`,
-        }),
+        apiBookingFromARoom: builder.query<BookingFromARoomQueryType[], string>(
+            {
+                query: (roomName) => `/getAllBookingFromARoom/${roomName}`,
+            }
+        ),
         apiBookARoom: builder.mutation<any, BookARoomType>({
             query: (queryArg) => ({
                 url: `/bookaroom`,

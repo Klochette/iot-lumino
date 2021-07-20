@@ -9,7 +9,43 @@ import {
     useApiBookARoomMutation,
 } from "services/api/api";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
-import { BookARoomType } from "types";
+import { BookARoomType, RoomType } from "types";
+
+type AccordionProps = { accordion: RoomType };
+
+export const Accordion = ({ accordion }: AccordionProps): JSX.Element => {
+    const [isOpen, setOpen] = React.useState(false);
+    return (
+        <div className={styles.accordion}>
+            <div
+                className={clsx(
+                    styles.title,
+                    isOpen && styles.isOpen,
+                    styles.green
+                )}
+                onClick={() => setOpen(!isOpen)}
+            >
+                <h2>{accordion.nameRoom}</h2>
+                <div className={clsx(styles.endIcons, styles.green)}>
+                    <h2>/{accordion.nbPlace}</h2>
+                    <ArrowUp />
+                </div>
+            </div>
+            <div
+                className={clsx(
+                    styles.content,
+                    isOpen && styles.collapsed,
+                    styles.green
+                )}
+            >
+                <div className={clsx(styles.items, styles.green)}>
+                    <p>Aucune réservation programmée</p>
+                    <button>Reserver</button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const Rooms = (): JSX.Element => {
     const { userType } = useParams<{ userType?: "student" | "admin" }>();
@@ -32,15 +68,10 @@ const Rooms = (): JSX.Element => {
         }
     };
 
-    const [isOpen, setOpen] = React.useState(false);
     return (
         <section className={styles.section}>
             <h1>Réservation</h1>
             <button onClick={bookARoomFunction}>booke</button>
-            <div>
-                <h2>Nombre de places voulues</h2>
-                <input type="number" />
-            </div>
             <div>
                 <h2>Filtrer</h2>
                 <div>
@@ -48,39 +79,14 @@ const Rooms = (): JSX.Element => {
                     <button>Accès libres</button>
                     <button>Libres</button>
                 </div>
-                <div>
-                    <h2>Bâtiment A</h2>
-                    <div className={styles.accordion}>
-                        <div
-                            className={clsx(
-                                styles.title,
-                                isOpen && styles.isOpen,
-                                styles.green
-                            )}
-                            onClick={() => setOpen(!isOpen)}
-                        >
-                            <h2>A03</h2>
-                            <div
-                                className={clsx(styles.endIcons, styles.green)}
-                            >
-                                <h2>0/20</h2>
-                                <ArrowUp />
-                            </div>
+                <div></div>
+                <h2>Bâtiment A</h2>
+                {data &&
+                    data.data.map((room: RoomType) => (
+                        <div key={room.id_room}>
+                            <Accordion accordion={room} />
                         </div>
-                        <div
-                            className={clsx(
-                                styles.content,
-                                isOpen && styles.collapsed,
-                                styles.green
-                            )}
-                        >
-                            <div className={clsx(styles.items, styles.green)}>
-                                <p>Aucune réservation programmée</p>
-                                <button>Reserver</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    ))}
             </div>
         </section>
     );

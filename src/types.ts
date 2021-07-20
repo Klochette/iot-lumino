@@ -12,11 +12,15 @@ export type userSliceType = {
     email?: string;
 };
 
-export type QueryARoomType = {
+export type RoomType = {
     id_room: number;
     isBooked: number;
     nameRoom: string;
     nbPlace: number;
+};
+
+export type QueryRoomType = {
+    data: RoomType[];
 };
 
 export type BookARoomType = {
