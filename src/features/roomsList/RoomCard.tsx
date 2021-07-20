@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./RoomCard.module.scss";
 import { ReactComponent as ArrowUp } from "assets/images/bi_three-dots.svg";
 import clsx from "clsx";
@@ -7,17 +7,25 @@ import {
     useApiBookingFromARoomQuery,
 } from "services/api/api";
 
-import { RoomType } from "types";
-import { useState } from "react";
+//type RoomProps = { room: RoomType };
+type RoomProps = { room: any };
 
-type RoomProps = { room: RoomType };
-
-export const Room = ({ room }: RoomProps): JSX.Element => {
-    const { nameRoom, nbPlace, isBooked } = room;
+const RoomCard = ({ room }: RoomProps): JSX.Element => {
+    const { nameRoom, nbPlace, isBooked, freeAccess } = room;
     const [isOpen, setOpen] = useState(false);
     const { data, isLoading } = useApiBookingFromARoomQuery(nameRoom);
     const [bookARoom] = useApiBookARoomMutation();
-    const color = isBooked === 1 ? "red" : nbPlace ? "yellow" : "green";
+    const addColor = () => {
+        if (freeAccess) {
+            return "yellow";
+        } else {
+            if (isBooked) {
+                return "red";
+            } else {
+                return "green";
+            }
+        }
+    };
 
     const bookARoomFunction = async () => {
         try {
@@ -40,12 +48,12 @@ export const Room = ({ room }: RoomProps): JSX.Element => {
                 className={clsx(
                     styles.title,
                     isOpen && styles.isOpen,
-                    styles[color]
+                    styles[addColor()]
                 )}
                 onClick={() => setOpen(!isOpen)}
             >
                 <h2>{nameRoom}</h2>
-                <div className={clsx(styles.endIcons, styles[color])}>
+                <div className={clsx(styles.endIcons, styles[addColor()])}>
                     <h2>?/{nbPlace}</h2>
                     <ArrowUp />
                 </div>
@@ -54,38 +62,45 @@ export const Room = ({ room }: RoomProps): JSX.Element => {
                 className={clsx(
                     styles.content,
                     isOpen && styles.collapsed,
-                    styles[color]
+                    styles[addColor()]
                 )}
             >
-                <div className={clsx(styles.items, styles[color])}>
-                    {isBooked === 1 && (
+                <div className={clsx(styles.items, styles[addColor()])}>
+                    {addColor() === "green" && (
                         <>
                             <p>Aucune réservation programmée</p>
                             <button
-                                className={styles[color]}
+                                className={styles[addColor()]}
                                 onClick={bookARoomFunction}
                             >
                                 réserver
                             </button>
                         </>
                     )}
-                    {isBooked === 0 && (
+                    {addColor() === "red" && (
                         <>
                             <ul>
                                 {data &&
                                     data.status.map((booking) => (
-                                        <li>
+                                        <li key={booking.id_booking}>
                                             Réservée de : {booking.start}h à{" "}
                                             {booking.end}h
                                         </li>
                                     ))}
+                                {isLoading && <p>Loading</p>}
                             </ul>
-                            <button className={styles[color]}>Réserver</button>
+                            <button className={styles[addColor()]}>
+                                Réserver
+                            </button>
                         </>
                     )}
-                    {isBooked === 2 && <p>Cette salle est à accès libre.</p>}
+                    {addColor() === "yellow" && (
+                        <p>Cette salle est à accès libre.</p>
+                    )}
                 </div>
             </div>
         </div>
     );
 };
+
+export default RoomCard;

@@ -14,9 +14,11 @@ export type userSliceType = {
 
 export type RoomType = {
     id_room: number;
-    isBooked?: number;
+    isBooked: boolean;
     nameRoom: string;
     nbPlace: number;
+    freeAccess: boolean;
+    building: string;
 };
 
 export type QueryRoomType = {
@@ -43,3 +45,5 @@ export type BookingFromARoomType = {
 export type QueryBookingFromARoomType = {
     status: BookingFromARoomType[];
 };
+
+export type FilterType = "building" | "freeAccess" | "isBooked";

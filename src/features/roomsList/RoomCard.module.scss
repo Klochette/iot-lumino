@@ -59,12 +59,16 @@
 
         &.green {
             border: 0px solid $green-dark;
-            justify-content: center;
-            align-items: center;
         }
 
         &.red {
             border: 0px solid $peach;
+        }
+
+        &.yellow {
+            border: 1px solid $yellow;
+            justify-content: center;
+            align-items: center;
         }
 
         &.collapsed {
