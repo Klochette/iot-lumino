@@ -54,6 +54,18 @@ input {
             -ms-transform: translateX(18px);
             transform: translateX(18px);
         }
+
+        &:after {
+            content: "";
+            width: 1px;
+            height: 7px;
+            background-color: #FFF;
+
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
     }
 
     &:focus + .slider {
