@@ -36,12 +36,11 @@
 .info{
   border-top: 1px solid lightsalmon;
   display: flex;
-  height: 19%;
   flex-direction: column;
   align-items: center ;
-  justify-content: flex-end;
   background-color: white;
-  padding-bottom: 5px;
+  padding-top: 5rem;
+  padding-bottom: 1rem;
 
   .name {
   @include medium-text-style($text); 
@@ -57,6 +56,7 @@
 
 .settings {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   background-color: $grey-background;
 
@@ -67,8 +67,33 @@
 
     .password {
       display: flex;
+      @include text-style($grey-dark)
+    }
+
+    &__title {
+      padding: 1rem;
+    }
+  
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      background-color: #fff;
+
+      &__right {
+        display: flex;
+        align-items: center;
+      }
+
+      &__svg {
+        margin-right: 0.5rem;
+      }
     }
   }
+}
+
+.switch {
+  height: 50px;
 }
 
 
@@ -78,9 +103,10 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
+    padding: 2rem 0rem;
 
     .luminoLogo {
-        height: 40px;
+        height: 80px;
     }
 
     svg {
