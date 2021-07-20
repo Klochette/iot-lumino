@@ -4,8 +4,15 @@ import { ReactComponent as ProfilPicture } from "assets/images/profil_pic-nexus.
 import { ReactComponent as CloseIcon } from "assets/images/close-circle.svg";
 import { ReactComponent as Leaf } from "assets/images/leafNotification.svg";
 import { ReactComponent as Chevron } from "assets/images/bi_three-dots.svg";
+import { useApiRoomsQuery } from "services/api/api";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
+import Loader from "commons/loader/Loader";
 
 const Dashboard = (): JSX.Element => {
+    const { data: rooms, isLoading: isLoadingRooms } =
+        useApiRoomsQuery(skipToken);
+    console.log(rooms);
+
     return (
         <section className={styles.homeSection}>
             <header className={styles.headerHome}>
@@ -40,30 +47,33 @@ const Dashboard = (): JSX.Element => {
 
             {/* SALLE DIPONNIBLE A LA RESA */}
             <div className={styles.cardHome}>
-                <div>
-                    <h2>Salles disponnibles à la réservation</h2>
-                    <Chevron className={styles.chevron} />
-                </div>
-                <div className={styles.containerAvailableRoom}>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                    <div className={styles.availableRoom}>
-                        <p>A105</p>
-                    </div>
-                </div>
+                {!isLoadingRooms && (
+                    <>
+                        <div>
+                            <h2>Salles disponnibles à la réservation</h2>
+                            <Chevron className={styles.chevron} />
+                        </div>
+                        <div className={styles.containerAvailableRoom}>
+                            {rooms &&
+                                rooms.data.map((room) => {
+                                    return (
+                                        <div key={room.id_room}>
+                                            {!room.isBooked && (
+                                                <div
+                                                    className={
+                                                        styles.availableRoom
+                                                    }
+                                                >
+                                                    <p>{room.nameRoom}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    </>
+                )}
+                {isLoadingRooms && <Loader />}
             </div>
 
             {/* AUCUNE SALLE RESERVEE */}
