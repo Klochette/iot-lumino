@@ -1,20 +1,14 @@
+import React from "react";
 import { useAppDispatch, useAppSelector } from "app/store";
 import { login, setUserError } from "features/user/userSlice";
-import React, { useEffect } from "react";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import styles from "features/loginForm/LoginForm.module.scss";
 
 const LoginForm = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const [identifier, setIdentifier] = useState<string | undefined>();
     const [password, setPassword] = useState<string | undefined>();
-    const history = useHistory();
-    const { error, userType } = useAppSelector((state) => state.user);
-
-    useEffect(() => {
-        if (userType) history.push(`/${userType}/dashboard`);
-    }, [userType, history]);
+    const { error } = useAppSelector((state) => state.user);
 
     const onLoginSubmit = () => {
         if (identifier && password) {

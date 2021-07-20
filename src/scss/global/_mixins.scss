@@ -2,32 +2,34 @@
 // mixins
 
 @mixin h1-style($color) {
-  font-family: $font-family;
-  font-weight: normal;
-  color: $color;
-  font-size: $h1-size;
+    font-family: $font-family;
+    font-weight: normal;
+    color: $color;
+    font-size: $h1-size;
 }
 
 @mixin h1-style-stroke($color) {
-  font-family: $font-family;
-  font-weight: normal;
-  color: $color;
-  font-size: $h1-size;
-  -webkit-text-stroke: 0.3px $color;
+    font-family: $font-family;
+    font-weight: normal;
+    color: $color;
+    font-size: $h1-size;
+    -webkit-text-stroke: 1px $color;
+    letter-spacing: 0.03px;
+    padding: 30px 0 0 20px;
 }
 
 @mixin h2-style($color) {
-  font-family: $font-family;
-  font-weight: normal;
-  color: $color;
-  font-size: $h2-size;
+    font-family: $font-family;
+    font-weight: normal;
+    color: $color;
+    font-size: $h2-size;
 }
 
 @mixin text-style($color) {
-  font-family: $font-family;
-  font-weight: normal;
-  color: $color;
-  font-size: $text-size;
+    font-family: $font-family;
+    font-weight: normal;
+    color: $color;
+    font-size: $text-size;
 }
 
 @mixin small-text-style($color) {
