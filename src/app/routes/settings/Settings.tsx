@@ -86,7 +86,9 @@ const Settings = (): JSX.Element => {
                     <RightArrow />
                 </div>
             </div>
-            <div className={styles.disconnect}></div>
+            <div className={styles.disconnect}>
+                <p>Se déconnecter</p>
+            </div>
             <div className={styles.credits}>
                 <LuminoLogo className={styles.luminoLogo} />
                 <NexusLogo />

@@ -92,8 +92,13 @@
   }
 }
 
-.switch {
-  height: 50px;
+.disconnect {
+  margin-top: 1rem;
+  p {
+    @include text-style($negative-red);
+    text-decoration: underline;
+    text-align: center;
+  }
 }
 
 
