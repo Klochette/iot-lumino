@@ -3,13 +3,40 @@ import { useParams } from "react-router-dom";
 import styles from "./Rooms.module.scss";
 import { ReactComponent as ArrowUp } from "assets/images/bi_three-dots.svg";
 import clsx from "clsx";
+import {
+    useApiBookingFromARoomQuery,
+    useApiRoomsQuery,
+    useApiBookARoomMutation,
+} from "services/api/api";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
+import { BookARoomType } from "types";
 
 const Rooms = (): JSX.Element => {
     const { userType } = useParams<{ userType?: "student" | "admin" }>();
+    const { data, isLoading } = useApiRoomsQuery(skipToken);
+    const [bookARoom] = useApiBookARoomMutation();
+    console.log(data);
+
+    const bookARoomFunction = async () => {
+        try {
+            const args: BookARoomType = {
+                start: 8,
+                end: 9,
+                nameRoom: "A105",
+                email: "nawel.berrichi@hetic.net",
+            };
+            const bookedRoomFunction = await bookARoom(args).unwrap();
+            console.log(bookedRoomFunction);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const [isOpen, setOpen] = React.useState(false);
     return (
         <section className={styles.section}>
             <h1>Réservation</h1>
+            <button onClick={bookARoomFunction}>booke</button>
             <div>
                 <h2>Nombre de places voulues</h2>
                 <input type="number" />

@@ -12,7 +12,9 @@ export const store = configureStore({
         user,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(api.middleware),
+        getDefaultMiddleware({
+            serializableCheck: false,
+        }).concat(api.middleware),
 });
 
 setupListeners(store.dispatch);
