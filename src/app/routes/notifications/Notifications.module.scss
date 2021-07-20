@@ -4,8 +4,7 @@
 .notifications {
     height: 90vh;
     position: relative;
-    //Mettre la bonne couleur
-    background-color: $grey-light;
+    background-color: $grey-background;
 
     .title {
         @include h1-style-stroke($text);
