@@ -7,11 +7,25 @@ import { ReactComponent as Chevron } from "assets/images/bi_three-dots.svg";
 import { useApiRoomsQuery } from "services/api/api";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import Loader from "commons/loader/Loader";
+import ModalDelete from "features/modalDelete/ModalDelete";
+import { useState } from "react";
 
 const Dashboard = (): JSX.Element => {
     const { data: rooms, isLoading: isLoadingRooms } =
         useApiRoomsQuery(skipToken);
-    console.log(rooms);
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        if (!open) {
+            setOpen(true);
+        }
+    };
+
+    const handleClose = () => {
+        if (open) {
+            setOpen(false);
+        }
+    };
 
     return (
         <section className={styles.homeSection}>
@@ -32,7 +46,10 @@ const Dashboard = (): JSX.Element => {
                 <div className={styles.containerBookedRoom}>
                     <div className={styles.bookedRoomImg}>
                         <p>A105</p>
-                        <CloseIcon className={styles.closeIcon} />
+                        <CloseIcon
+                            className={styles.closeIcon}
+                            onClick={handleOpen}
+                        />
                     </div>
                     <div className={styles.rightSide}>
                         <div className={styles.pictoGroupe}>
@@ -97,6 +114,9 @@ const Dashboard = (): JSX.Element => {
                     Ajouter un groupe
                 </button>
             </div>
+            {open && rooms && (
+                <ModalDelete onClick={handleClose} room={rooms.data[0]} />
+            )}
         </section>
     );
 };
