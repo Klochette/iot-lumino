@@ -6,6 +6,7 @@
     font-weight: normal;
     color: $color;
     font-size: $h1-size;
+    padding: 0 0 0 20px;
 }
 
 @mixin h1-style-stroke($color) {
@@ -33,15 +34,15 @@
 }
 
 @mixin small-text-style($color) {
-  font-family: $font-family;
-  font-weight: normal;
-  color: $color;
-  font-size: $small-text-size;
+    font-family: $font-family;
+    font-weight: normal;
+    color: $color;
+    font-size: $small-text-size;
 }
 
 @mixin medium-text-style($color) {
-  font-family: $font-family;
-  font-weight: normal;
-  color: $color;
-  font-size: $medium-text-size;
+    font-family: $font-family;
+    font-weight: normal;
+    color: $color;
+    font-size: $medium-text-size;
 }
