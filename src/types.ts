@@ -14,7 +14,7 @@ export type userSliceType = {
 
 export type RoomType = {
     id_room: number;
-    isBooked: number;
+    isBooked?: number;
     nameRoom: string;
     nbPlace: number;
 };
@@ -25,12 +25,12 @@ export type QueryRoomType = {
 
 export type BookARoomType = {
     nameRoom: string;
-    start: number;
-    end: number;
-    email: string;
+    start: string;
+    end: string;
+    studentEmail: string;
 };
 
-export type BookingFromARoomQueryType = {
+export type BookingFromARoomType = {
     end: number;
     id_booking: number;
     id_room: number;
@@ -38,4 +38,8 @@ export type BookingFromARoomQueryType = {
     nbPlace: number;
     start: number;
     studentEmail: string;
+};
+
+export type QueryBookingFromARoomType = {
+    status: BookingFromARoomType[];
 };

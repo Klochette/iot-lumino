@@ -46,3 +46,7 @@ label {
 p {
     @include text-style($grey-dark);
 }
+
+li {
+    @include text-style($grey-dark);
+}

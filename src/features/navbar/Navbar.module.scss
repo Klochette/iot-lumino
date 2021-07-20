@@ -8,6 +8,7 @@
     padding: 10px;
     position: fixed;
     bottom: 0;
+    z-index: 999;
 
     &.dark {
         background-color: black;
