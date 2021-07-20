@@ -14,7 +14,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
     const { nameRoom, nbPlace, isBooked, freeAccess } = room;
     const [isOpen, setOpen] = useState(false);
     const { data, isLoading } = useApiBookingFromARoomQuery(nameRoom);
-    const [bookARoom] = useApiBookARoomMutation();
+    //const [bookARoom] = useApiBookARoomMutation();
     const addColor = () => {
         if (freeAccess) {
             return "yellow";
@@ -27,7 +27,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
         }
     };
 
-    const bookARoomFunction = async () => {
+    /* const bookARoomFunction = async () => {
         try {
             const args = {
                 start: "8",
@@ -40,7 +40,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
         } catch (error) {
             console.log(error);
         }
-    };
+    }; */
 
     return (
         <div className={styles.accordion}>
@@ -69,10 +69,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                     {addColor() === "green" && (
                         <>
                             <p>Aucune réservation programmée</p>
-                            <button
-                                className={styles[addColor()]}
-                                onClick={bookARoomFunction}
-                            >
+                            <button className={styles[addColor()]}>
                                 réserver
                             </button>
                         </>
