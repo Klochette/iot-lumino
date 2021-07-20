@@ -3,8 +3,8 @@ import { userSliceType } from "types";
 
 const initialState: userSliceType = {
     userType: "student",
-    email: "eee",
-    identifier: "Nawel Borrini",
+    email: 'nawel.borini@hetic.net',
+    identifier: "Nawel Borini",
     password: "gogog",
 };
 
@@ -44,6 +44,7 @@ const userSlice = createSlice({
             state.identifier = undefined;
             state.userType = undefined;
             state.error = undefined;
+            state.email = undefined;
         },
         changePassword: (
             state,

@@ -17,7 +17,7 @@ const Login = (): JSX.Element => {
             <div className={styles.credits}>
                 <LuminoLogo className={styles.luminoLogo} />
                 <NexusLogo />
-                <p>Made with 💛&nbsp;&nbsp; by Lumino</p>
+                <p>Made with 💛&nbsp;by Lumino</p>
             </div>
         </section>
     );
