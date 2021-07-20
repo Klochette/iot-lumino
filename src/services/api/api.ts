@@ -7,8 +7,27 @@ export const api = createApi({
         baseUrl: "",
     }),
     endpoints: (builder) => ({
-        //endpoints for api
+        apiQueryRooms: builder.query({
+            query: () => `/getAllRoom`,
+        }),
+        apiBookingFromARoom: builder.query({
+            query: (roomName) => `/getAllBookingFromARoom/${roomName}`,
+        }),
+        apiBookARoom: builder.mutation<
+            any,
+            { nameRoom: string; start: number; end: number; email: number }
+        >({
+            query: (queryArg) => ({
+                url: `/bookARoom`,
+                method: "POST",
+                body: queryArg,
+            }),
+        }),
     }),
 });
 
-export const endpoints = api;
+export const {
+    useApiQueryRoomsQuery,
+    useApiBookARoomMutation,
+    useApiBookingFromARoomQuery,
+} = api;
