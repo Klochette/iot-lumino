@@ -1,13 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import styles from "./Notifications.module.scss";
 import { ReactComponent as Leaf } from "assets/images/leafNotification.svg";
 import { ReactComponent as RedDots } from "assets/images/three-dots.svg";
 import { ReactComponent as Chevron } from "assets/images/bi_three-dots.svg";
 
 const Notifications = (): JSX.Element => {
-    const { userType } = useParams<{ userType?: "student" | "admin" }>();
-    console.log(userType);
     return (
         <section className={styles.notifications}>
             <h1 className={styles.title}>Notifications</h1>

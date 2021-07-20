@@ -20,6 +20,9 @@ const Router = (): JSX.Element => {
         <BrowserRouter>
             <Navbar />
             <Switch>
+                <Route exact path={"/"}>
+                    <Redirect to={"/login"} />
+                </Route>
                 <Route exact path={"/login"}>
                     {userType ? (
                         <Redirect to={`${userType}/dashboard`} />
