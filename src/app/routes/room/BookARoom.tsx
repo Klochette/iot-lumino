@@ -12,23 +12,6 @@ const BookARoom = (): JSX.Element => {
     const { data, isLoading } = useApiGetBokingByRoomIdQuery(4);
     const [bookARoomPost] = useApiBookARoomMutation();
     const history = useHistory();
-    console.log(data);
-    
-    const bookingStore = { 
-        9: 'free',
-        10: 'booked',
-        11: 'booked',
-        12: 'free',
-        13: 'free',
-        14: 'free',
-        15: 'booked',
-        16: 'free',
-        17: 'free',
-        18: 'free',
-        19: 'booked',
-        20: 'free',
-        21: 'free',
-    };
 
     const [isBooked, setIsBooked] = useState(data?.data);
     
@@ -53,16 +36,12 @@ const BookARoom = (): JSX.Element => {
         }
     }
     
-    console.log(start, end);
-    
     const [error, setError] = useState<Boolean|undefined>(false);
 
 
 
     const fixStartEnd = (int: any) => {       
         //@ts-ignore
-        console.log(int);
-        
         if (start !== undefined && Number(int) > start) {
             console.log(int, start);
             setEnd(int)
@@ -105,19 +84,17 @@ const BookARoom = (): JSX.Element => {
             
 
             //@ts-ignore
-            if(Number(keys) > start && Number(keys) < end && isBooked[keys] === 'booked') {
+            if(Number(keys) > start && Number(keys) < end && isBooked[keys] === true) {
                 //@ts-ignore   
                 setError(true);
             //@ts-ignore
-            } else if (Number(keys) > start && Number(keys) < end && isBooked[keys] !== 'booked'){
+            } else if (Number(keys) > start && Number(keys) < end && isBooked[keys] !== false){
                 //@ts-ignore   
                 setError(false)
             }
         }
     }, [ isBooked])
 
-    console.log(isBooked);
-    
     return (
         <section className={styles.section}>
             <div className={styles.topWrapper}>
@@ -131,7 +108,7 @@ const BookARoom = (): JSX.Element => {
             </div>
             <div className={styles.bottomWrapper}>
                 {error &&
-                    <p className={styles.errorMsg}>Ce créneau horraires n'est pas disponible, veuillez en sélectionner un autre.</p>
+                    <p className={styles.errorMsg}>Ce créneau horaire n'est pas disponible, veuillez en sélectionner un autre.</p>
                 }
                 <p className={styles.bottomWrapper__start}>{start === undefined ? "Séléctionnez votre départ" : "Séléctionnez votre arrivée"}</p>
                 <ul className={styles.bottomWrapper__list}>

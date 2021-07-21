@@ -35,7 +35,8 @@
         text-align: center;
 
         .errorMsg {
-            @include small-text-style($peach)
+            @include small-text-style($peach);
+            padding: 0rem 0.5rem;
         }
 
         &__start {
