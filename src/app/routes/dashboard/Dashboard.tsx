@@ -3,6 +3,7 @@ import styles from "./Dashboard.module.scss";
 import { ReactComponent as ProfilPicture } from "assets/images/profil_pic-nexus.svg";
 import { useAppSelector } from "app/store";
 import StudentDashboard from "features/studentDashboard/StudentDashboard";
+import AdminDashboard from "features/adminDashboard/AdminDashboard";
 
 const Dashboard = (): JSX.Element => {
     const { userType, identifier } = useAppSelector((state) => state.user);
@@ -21,7 +22,7 @@ const Dashboard = (): JSX.Element => {
                 </div>
                 <ProfilPicture className={styles.profilPicture} />
             </header>
-            {userType === "student" && <StudentDashboard />}
+            {userType === "student" ? <StudentDashboard /> : <AdminDashboard />}
         </section>
     );
 };

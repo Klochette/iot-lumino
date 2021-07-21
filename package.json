@@ -4,6 +4,7 @@
     "private": true,
     "proxy": "https://awww.api.com/",
     "dependencies": {
+        "@fseehawer/react-circular-slider": "^2.3.5",
         "@reduxjs/toolkit": "^1.6.0",
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
@@ -18,6 +19,7 @@
         "node-sass": "^6.0.1",
         "prettier": "^2.3.2",
         "react": "^17.0.2",
+        "react-circle-slider": "^1.6.2",
         "react-dom": "^17.0.2",
         "react-redux": "^7.2.4",
         "react-router-dom": "^5.2.0",
