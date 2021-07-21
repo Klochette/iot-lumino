@@ -35,7 +35,8 @@
         text-align: center;
 
         .errorMsg {
-            @include small-text-style($peach)
+            @include small-text-style($peach);
+            padding: 0rem 0.5rem;
         }
 
         &__start {
@@ -62,7 +63,7 @@
             justify-content: center;
         }
 
-        .booked {
+        .true {
             background-color: $grey-light;
             pointer-events: none;
         }
@@ -73,7 +74,7 @@
             color: #1672EC;
         }
 
-        .free {
+        .false {
             border: 1px solid #1672EC;
             color: #1672EC;
         }
