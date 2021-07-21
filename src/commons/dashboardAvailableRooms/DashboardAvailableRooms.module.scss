@@ -1,0 +1,30 @@
+@import "./../../scss/styles.scss";
+
+.containerAvailableRoom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 4px;
+
+    .availableRoom {
+        width: 55px;
+        height: 55px;
+        background-color: $green-dark;
+        border-radius: 9px;
+        position: relative;
+
+        p {
+            @include h2-style($blue-grey);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.containerFreeAccessRoom {
+    .freeAccessRoom {
+        background-color: $yellow;
+    }
+}
