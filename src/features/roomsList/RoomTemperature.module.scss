@@ -1,0 +1,91 @@
+@import "../../scss/styles.scss";
+
+.temperaturesCards {
+    height: 95px;
+    border-radius: 9px;
+    filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.09));
+    background-color: $white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    h2 {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+    }
+
+    .temperature {
+        color: $text;
+        border: 2px solid $peach;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 5px;
+    }
+
+    &.green {
+        border: 1px solid $green-dark;
+    }
+    &.yellow {
+        border: 1px solid $yellow;
+    }
+    &.red {
+        border: 1px solid $peach;
+    }
+}
+
+.round {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+
+    input {
+        height: 16px;
+    }
+}
+
+.round label {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 20px;
+}
+
+.round label:after {
+    border: 1px solid #fff;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 3px;
+    left: 6px;
+    opacity: 0;
+    position: absolute;
+    top: 6px;
+    transform: rotate(-45deg);
+    width: 5px;
+}
+
+.round input[type="checkbox"] {
+    visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+    background-color: $text-filter;
+    border-color: $text-filter;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}

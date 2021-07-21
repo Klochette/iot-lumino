@@ -6,8 +6,10 @@ import styles from "app/routes/rooms/Rooms.module.scss";
 
 import RoomsList from "features/roomsList/RoomsList";
 import ButtonChecked from "commons/buttonChecked/ButtonChecked";
+import { useParams } from "react-router-dom";
 
 const Rooms = (): JSX.Element => {
+    const { userType } = useParams<{ userType?: "student" | "admin" }>();
     const [filter, setFilter] = useState<FilterType>();
 
     const handleFilterClick = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +25,9 @@ const Rooms = (): JSX.Element => {
 
     return (
         <section className={styles.section}>
-            <h1 className={styles.title}>Réservation</h1>
+            <h1 className={styles.title}>
+                {userType === "student" ? "Réservation" : "Paramètres"}
+            </h1>
             <div>
                 <h2 className={styles.filterTitle}>Filtrer</h2>
                 <div className={styles.filters}>
@@ -46,7 +50,7 @@ const Rooms = (): JSX.Element => {
                         label="Libres"
                     />
                 </div>
-                <RoomsList filter={filter} />
+                {<RoomsList filter={filter} userType={userType} />}
             </div>
         </section>
     );
