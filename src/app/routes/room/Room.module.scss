@@ -33,6 +33,11 @@
     .bottomWrapper {
         margin-top: 1rem;
         text-align: center;
+
+        .errorMsg {
+            @include small-text-style($peach)
+        }
+
         &__start {
              margin: 1rem 0;
             @include h2-style($text);
@@ -73,5 +78,14 @@
             color: #1672EC;
         }
 
+    }
+
+    .ctn {
+        margin: 0rem auto 5rem auto;
+        @include h2-style($text);
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
