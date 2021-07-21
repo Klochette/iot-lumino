@@ -1,0 +1,91 @@
+@import "../../../scss/styles.scss";
+
+.section {
+    .topWrapper {
+        background-color: $green-dark;
+
+        &__book {
+            padding: 1.5rem;
+            padding-bottom: 4rem;
+            h1 {
+                @include h1-style($text);
+            }
+        }
+
+        &__room {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            .room {
+                @include medium-text-style($text-green);
+                margin-bottom: 0.5rem;
+            }
+            
+            .roomName {
+                @include medium-text-style($text-green);
+                font-size: 72px;
+                padding-bottom: 5rem;
+            }
+        }
+    }
+
+    .bottomWrapper {
+        margin-top: 1rem;
+        text-align: center;
+
+        .errorMsg {
+            @include small-text-style($peach)
+        }
+
+        &__start {
+             margin: 1rem 0;
+            @include h2-style($text);
+        }
+
+        &__list {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(89px, 1fr));
+        //    grid-gap: 0.8rem;
+           padding: 0.5rem;
+        }
+
+        &__listItem {
+            height: 40px;
+            @include h2-style($text);
+            border-radius: 9px;
+            margin-right: 0.8rem;
+            margin-bottom: 0.8rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .booked {
+            background-color: $grey-light;
+            pointer-events: none;
+        }
+
+        .userBooked {
+            background-color: #E1ECFB;
+            border: 1px solid #1672EC;
+            color: #1672EC;
+        }
+
+        .free {
+            border: 1px solid #1672EC;
+            color: #1672EC;
+        }
+
+    }
+
+    .ctn {
+        margin: 0rem auto 5rem auto;
+        @include h2-style($text);
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

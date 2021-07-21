@@ -12,6 +12,8 @@ import Login from "./login/Login";
 import NotFound from "./notFound/NotFound";
 import Notifications from "./notifications/Notifications";
 import Rooms from "./rooms/Rooms";
+import BookARoom from "./room/BookARoom";
+
 import Settings from "./settings/Settings";
 
 const Router = (): JSX.Element => {
@@ -30,14 +32,17 @@ const Router = (): JSX.Element => {
                         <Login />
                     )}
                 </Route>
-                <Route path={"/:userType/dashboard"}>
+                <Route exact path={"/:userType/dashboard"}>
                     <PrivateRoute
                         userType={userType}
                         component={<Dashboard />}
                     />
                 </Route>
-                <Route path={"/:userType/rooms"}>
+                <Route exact path={"/:userType/rooms"}>
                     <PrivateRoute userType={userType} component={<Rooms />} />
+                </Route>
+                <Route exact path={"/:userType/rooms/book"}>
+                    <PrivateRoute userType={userType} component={<BookARoom />} />
                 </Route>
                 <Route exact path={"/:userType/notifications"}>
                     <PrivateRoute
