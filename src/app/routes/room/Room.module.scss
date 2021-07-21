@@ -62,7 +62,7 @@
             justify-content: center;
         }
 
-        .booked {
+        .true {
             background-color: $grey-light;
             pointer-events: none;
         }
@@ -73,7 +73,7 @@
             color: #1672EC;
         }
 
-        .free {
+        .false {
             border: 1px solid #1672EC;
             color: #1672EC;
         }

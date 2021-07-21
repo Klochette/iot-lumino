@@ -9,7 +9,7 @@ import { setUserError } from "features/user/userSlice";
 
 const BookARoom = (): JSX.Element => {
     const { userType } = useParams<{ userType?: "student" | "admin" }>();
-    const { data, isLoading } = useApiGetBokingByRoomIdQuery(3);
+    const { data, isLoading } = useApiGetBokingByRoomIdQuery(4);
     const [bookARoomPost] = useApiBookARoomMutation();
     const history = useHistory();
     console.log(data);
@@ -30,7 +30,7 @@ const BookARoom = (): JSX.Element => {
         21: 'free',
     };
 
-    const [isBooked, setIsBooked] = useState(bookingStore);
+    const [isBooked, setIsBooked] = useState(data?.data);
     
 
     const [start, setStart] = useState<number|undefined>();
@@ -71,7 +71,7 @@ const BookARoom = (): JSX.Element => {
         if(start === undefined || Number(int) < start){
             setStart(int)
         }
-
+        
         if(end === Number(int)){
             for(const keys in isBooked){
                 //@ts-ignore
@@ -83,21 +83,26 @@ const BookARoom = (): JSX.Element => {
         }
     }
 
-    // useEffect(() =>  {
-    //     if(data && data.data){
-    //         setIsBooked(data.data)
-    //     }
-    // }, [data])
+    useEffect(() =>  {
+        if(data && data.data){
+            setIsBooked(data.data)
+        }
+    }, [data])
 
     useEffect(() =>  {
 
         //@ts-ignore
         for(const keys in isBooked){
             //@ts-ignore
-            if(Number(keys) > start && Number(keys) <= end && isBooked[keys] === 'free') {
+            if(Number(keys) >= start && Number(keys) <= end && isBooked[keys] === false) {
                 //@ts-ignore
                 setIsBooked({...isBooked, [Number(keys)]: 'userBooked'})
+                //@ts-ignore
+            } else if (Number(keys) < start || Number(keys) > end && isBooked[keys] === 'userBooked') {
+                //@ts-ignore
+                setIsBooked({...isBooked, [Number(keys)]: false});
             }
+            
 
             //@ts-ignore
             if(Number(keys) > start && Number(keys) < end && isBooked[keys] === 'booked') {
@@ -136,7 +141,7 @@ const BookARoom = (): JSX.Element => {
                         className={clsx(styles.bottomWrapper__listItem, styles[isBooked[key]])}
                         onClick={() => {
                             //@ts-ignore
-                            isBooked[key] === 'userBooked' ? setIsBooked({...isBooked, [key]: 'free'}) :  setIsBooked({...isBooked, [key]: 'userBooked'})
+                            isBooked[key] === 'userBooked' ? setIsBooked({...isBooked, [key]: false}) :  setIsBooked({...isBooked, [key]: 'userBooked'})
                             fixStartEnd(Number(key))
                         }
                         } 
