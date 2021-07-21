@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import styles from "./Room.module.scss";
 import { useState } from "react";
+import { useApiBookARoomMutation, useApiGetBokingByRoomIdQuery } from "services/api/api";
 
 import clsx from "clsx";
 import { setUserError } from "features/user/userSlice";
 
 const BookARoom = (): JSX.Element => {
     const { userType } = useParams<{ userType?: "student" | "admin" }>();
+    const { data, isLoading } = useApiGetBokingByRoomIdQuery(3);
+    const [bookARoomPost] = useApiBookARoomMutation();
+    const history = useHistory();
+    console.log(data);
+    
     const bookingStore = { 
         9: 'free',
         10: 'booked',
@@ -25,25 +31,48 @@ const BookARoom = (): JSX.Element => {
     };
 
     const [isBooked, setIsBooked] = useState(bookingStore);
+    
 
     const [start, setStart] = useState<number|undefined>();
     const [end, setEnd] = useState<number|undefined>();
 
+    const bookARoom = async () => {
+        try{
+            if(start && end){
+                const a = start.toString();
+                const b = end.toString();
+                const booking = {start: a, end: b, nameRoom: 'A105', studentEmail: 'nawel.borini@hetic.net'}
+                const result = await bookARoomPost(booking).unwrap()
+                    // .then(() => history.push("/student/dashboard"))
+                    console.log(result);
+                    
+            }
+        }
+        catch(error) {
+            console.log(error); 
+        }
+    }
+    
+    console.log(start, end);
+    
     const [error, setError] = useState<Boolean|undefined>(false);
 
 
 
     const fixStartEnd = (int: any) => {       
         //@ts-ignore
-        if (int > start || start !== undefined) {
+        console.log(int);
+        
+        if (start !== undefined && Number(int) > start) {
+            console.log(int, start);
             setEnd(int)
         }
         //@ts-ignore
-        if(start === undefined || int < start){
+        if(start === undefined || Number(int) < start){
             setStart(int)
         }
 
-        if(end === int){
+        if(end === Number(int)){
             for(const keys in isBooked){
                 //@ts-ignore
                 if(isBooked[keys] === 'userBooked' && keys > start && keys < end){
@@ -54,12 +83,18 @@ const BookARoom = (): JSX.Element => {
         }
     }
 
+    // useEffect(() =>  {
+    //     if(data && data.data){
+    //         setIsBooked(data.data)
+    //     }
+    // }, [data])
+
     useEffect(() =>  {
 
         //@ts-ignore
         for(const keys in isBooked){
             //@ts-ignore
-            if(Number(keys) > start && Number(keys) < end && isBooked[keys] === 'free') {
+            if(Number(keys) > start && Number(keys) <= end && isBooked[keys] === 'free') {
                 //@ts-ignore
                 setIsBooked({...isBooked, [Number(keys)]: 'userBooked'})
             }
@@ -76,6 +111,8 @@ const BookARoom = (): JSX.Element => {
         }
     }, [isBooked])
 
+    console.log(isBooked);
+    
     return (
         <section className={styles.section}>
             <div className={styles.topWrapper}>
@@ -93,20 +130,25 @@ const BookARoom = (): JSX.Element => {
                 }
                 <p className={styles.bottomWrapper__start}>{start === undefined ? "Séléctionnez votre départ" : "Séléctionnez votre arrivée"}</p>
                 <ul className={styles.bottomWrapper__list}>
-                    {Object.keys(isBooked).map(function(key: any, index) {
+                    {isBooked && Object.keys(isBooked).map(function(key: any, index) {
                        return <li 
                         //@ts-ignore
                         className={clsx(styles.bottomWrapper__listItem, styles[isBooked[key]])}
                         onClick={() => {
                             //@ts-ignore
                             isBooked[key] === 'userBooked' ? setIsBooked({...isBooked, [key]: 'free'}) :  setIsBooked({...isBooked, [key]: 'userBooked'})
-                            fixStartEnd(key)
+                            fixStartEnd(Number(key))
                         }
                         } 
                     >{key}:00</li>
                     })}
                 </ul>
-                <button className={styles.ctn}>Réservez</button>
+               
+                <button className={styles.ctn} 
+                onClick={() => {
+                    bookARoom() 
+                }}
+                >Réservez</button>
             </div>
         </section>
     );
