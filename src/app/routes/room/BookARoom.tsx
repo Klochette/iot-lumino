@@ -114,7 +114,7 @@ const BookARoom = (): JSX.Element => {
                 setError(false)
             }
         }
-    }, [isBooked])
+    }, [ isBooked])
 
     console.log(isBooked);
     
@@ -140,9 +140,9 @@ const BookARoom = (): JSX.Element => {
                         //@ts-ignore
                         className={clsx(styles.bottomWrapper__listItem, styles[isBooked[key]])}
                         onClick={() => {
+                            fixStartEnd(Number(key))
                             //@ts-ignore
                             isBooked[key] === 'userBooked' ? setIsBooked({...isBooked, [key]: false}) :  setIsBooked({...isBooked, [key]: 'userBooked'})
-                            fixStartEnd(Number(key))
                         }
                         } 
                     >{key}:00</li>
