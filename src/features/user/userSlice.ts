@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userSliceType } from "types";
 
 const initialState: userSliceType = {
-    userType: "student",
-    email: 'nawel.borini@hetic.net',
+    userType: "admin",
+    email: "nawel.borini@hetic.fr",
     identifier: "Nawel Borini",
     password: "gogog",
 };

@@ -1,0 +1,45 @@
+@import "../../scss/styles.scss";
+
+.cards {
+    border-radius: 9px;
+    margin: 0 20px 26px 20px;
+    display: flex;
+    justify-content: space-between;
+    min-height: 90px;
+    height: auto;
+
+    &.dark {
+        background-color: $text;
+
+        h2 {
+            color: $white;
+        }
+        button {
+            background-color: $peach;
+        }
+    }
+
+    &.light {
+        display: flex;
+        flex-direction: column;
+        background-color: $white;
+        padding: 16px;
+        p {
+            margin-top: 10px;
+        }
+
+        a {
+            align-self: center;
+        }
+
+        button {
+            background-color: $blue-grey;
+            align-self: center;
+        }
+    }
+
+    button {
+        color: $white;
+        width: 140px;
+    }
+}

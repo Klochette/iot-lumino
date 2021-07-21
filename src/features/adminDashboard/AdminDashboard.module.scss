@@ -1,0 +1,29 @@
+@import "../../scss/styles.scss";
+
+.icon {
+    &Light {
+        margin-left: 10px;
+    }
+}
+
+.turnOffLights {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 13px;
+    flex-grow: 1;
+    align-items: center;
+
+    button {
+        margin-top: 15px;
+    }
+}
+
+.slider {
+    display: flex;
+    justify-content: center;
+    svg {
+        padding: 30px;
+        height: 200px;
+    }
+}

@@ -19,17 +19,17 @@ type RoomProps = { room: RoomType };
 const RoomCard = ({ room }: RoomProps): JSX.Element => {
     const [isOpen, setOpen] = useState(false);
 
-    const { nameRoom, nbPlace, freeAccess, isBooked, id_room } = room;
+    const { nameRoom, nbPlace, freeAccess, id_room } = room;
 
     const { data, isLoading } = useApiBookingFromARoomQuery(nameRoom);
     const { data: roomBooking, isLoading: roomBookingLoading } =
         useApiGetBokingByRoomIdQuery(id_room);
-
     const getIsFull = () => {
         if (roomBooking && roomBooking.data)
             for (const key in roomBooking.data) {
-                if (roomBooking.data[key] === true) return true;
+                if (roomBooking.data[key] === false) return false;
             }
+        return true;
     };
     const isFull = getIsFull();
 
@@ -37,7 +37,8 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
         if (freeAccess) {
             return "yellow";
         } else {
-            if (isBooked) {
+            //@ts-ignore
+            if (data && data.status[0] !== "oui") {
                 return "red";
             } else {
                 return "green";
