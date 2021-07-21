@@ -4,7 +4,7 @@ import styles from "./ModalDelete.module.scss";
 import { ReactComponent as CloseIcon } from "assets/images/closeModalIcon.svg";
 
 type ModalDeleteType = {
-    room: RoomType;
+    room?: RoomType;
     onClick: (
         e: React.MouseEvent<
             SVGSVGElement | HTMLDivElement | HTMLButtonElement,
@@ -22,7 +22,7 @@ const ModalDelete = ({ room, onClick }: ModalDeleteType): JSX.Element => {
             >
                 <CloseIcon onClick={onClick} className={styles.icon} />
                 <div className={styles.bookedRoomImg}>
-                    <p>{room.nameRoom}</p>
+                    <p>{room?.nameRoom}</p>
                 </div>
                 <h2>Souhaitez-vous annuler la réservation ?</h2>
                 <div className={styles.divider}></div>
