@@ -49,7 +49,7 @@ const DashboardAvailableRooms = ({
                     })}
                 </div>
             ) : (
-                <p>{error}</p>
+                <p className={styles.dashboardErrorMsg}>{error}</p>
             )}
         </>
     );

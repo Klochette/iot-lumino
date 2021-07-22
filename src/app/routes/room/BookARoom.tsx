@@ -6,6 +6,8 @@ import {
     useApiGetBokingByRoomIdQuery,
 } from "services/api/api";
 
+import Loader from "commons/loader/Loader";
+
 import clsx from "clsx";
 
 const BookARoom = (): JSX.Element => {

@@ -43,7 +43,7 @@ const sortRoom = (rooms: RoomType[], filter: FilterType) => {
 };
 
 const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
-    const { data, isLoading } = useApiRoomsQuery(skipToken);
+    const { data, isLoading } = useApiRoomsQuery(undefined, {skip: !userType});
 
     const [roomsToChange, setRoomsToChange] = useState<number[]>([]);
     const [open, setOpen] = useState(false);
@@ -99,7 +99,7 @@ const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
             getKeys.push(key);
     }
 
-    return (
+    return ( 
         <>
             <div className={styles.roomsList}>
                 {isLoading && <Loader />}
