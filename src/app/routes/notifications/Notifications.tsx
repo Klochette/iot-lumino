@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Notifications.module.scss";
+import bastien from "assets/images/bastien.png";
 import { ReactComponent as RedDots } from "assets/images/three-dots.svg";
 
 const Notifications = (): JSX.Element => {
@@ -31,9 +32,11 @@ const Notifications = (): JSX.Element => {
                 </div>
                 <div className={styles.notificationCard}>
                     {/* A CHANGER */}
-                    <div className={styles.cardRoom}>
-                        <p>A005</p>
-                    </div>
+                    <img
+                        className={styles.notificationImage}
+                        alt="profil picture"
+                        src={bastien}
+                    />
 
                     <div className={styles.cardRightBlock}>
                         <p className={styles.cardMessage}>
