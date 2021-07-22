@@ -47,3 +47,5 @@ export type QueryBookingFromARoomType = {
 };
 
 export type FilterType = "building" | "freeAccess" | "isBooked";
+
+export type RoomsSliceType = { rooms: number[] };

@@ -1,0 +1,59 @@
+@import "../../scss/styles.scss";
+
+.modal {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+
+    div {
+        padding: 20px;
+        background-color: $white;
+        border-radius: 9px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        h2 {
+            color: $text;
+        }
+
+        .svg-wrapper {
+            margin-bottom: 2rem;
+            width: 100%;
+            svg {
+                display: block;
+            }
+        }
+        .check {
+            stroke-dashoffset: 1000;
+            stroke-dasharray: 1000;
+            animation-name: drawLine;
+            animation-timing-function: cubic-bezier(0.77, 0.01, 0.48, 0.97);
+            fill: transparent;
+            animation-fill-mode: forwards;
+        }
+
+        .check {
+            animation-duration: 1s;
+            stroke: $green-dark;
+            animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
+            stroke-linecap: round;
+        }
+    }
+}
+
+@keyframes drawLine {
+    from {
+        stroke-dashoffset: 1000;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}

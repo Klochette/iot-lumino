@@ -14,9 +14,9 @@ import styles from "features/roomsList/RoomCard.module.scss";
 import { ReactComponent as ArrowUp } from "assets/images/bi_three-dots.svg";
 import { ReactComponent as ArrowDown } from "assets/images/arrowDown.svg";
 
-type RoomProps = { room: RoomType };
+type RoomProps = { room: RoomType; key: number };
 
-const RoomCard = ({ room }: RoomProps): JSX.Element => {
+const RoomCard = ({ room, key }: RoomProps): JSX.Element => {
     const [isOpen, setOpen] = useState(false);
 
     const { nameRoom, nbPlace, freeAccess, id_room } = room;
@@ -47,7 +47,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
     };
 
     return (
-        <div className={styles.accordion}>
+        <div key={key} className={styles.accordion}>
             <div
                 className={clsx(
                     styles.title,

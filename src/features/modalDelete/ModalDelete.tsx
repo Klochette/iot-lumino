@@ -26,7 +26,9 @@ const ModalDelete = ({ room, onClick }: ModalDeleteType): JSX.Element => {
                 </div>
                 <h2>Souhaitez-vous annuler la réservation ?</h2>
                 <div className={styles.divider}></div>
-                <p className={styles.cancel}>Annuler la réservation</p>
+                <p className={styles.cancel} onClick={onClick}>
+                    Annuler la réservation
+                </p>
                 <button className={styles.keep} onClick={onClick}>
                     Garder la réservation
                 </button>
