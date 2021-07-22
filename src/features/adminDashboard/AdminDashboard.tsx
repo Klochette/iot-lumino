@@ -37,7 +37,7 @@ const AdminDashboard = (): JSX.Element => {
             //@ts-ignore
             clearInterval(countRef.current);
             setCounter(4);
-        }, 5000);
+        }, 3000);
     };
 
     return (

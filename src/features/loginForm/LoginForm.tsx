@@ -47,7 +47,7 @@ const LoginForm = (): JSX.Element => {
                 </label>
                 <input
                     name="password"
-                    type="text"
+                    type="password"
                     required
                     onBlur={onAddPassword}
                     className={styles.input}
