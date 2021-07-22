@@ -5,7 +5,7 @@ import { BookARoomType, QueryBookingFromARoomType, QueryRoomType } from "types";
 export const api = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://35.180.13.188",
+        baseUrl: "https://api-iot.vhswebs.com",
     }),
     endpoints: (builder) => ({
         apiRooms: builder.query<QueryRoomType, undefined>({

@@ -39,7 +39,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
 
     useEffect(() => {
         refetch();
-    }, []);
+    }, [refetch]);
 
     const getIsEmpty = () => {
         if (roomBooking && roomBooking.data)
