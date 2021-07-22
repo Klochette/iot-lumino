@@ -74,8 +74,6 @@ const StudentDashboard = (): JSX.Element => {
     };
     return (
         <>
-            {/* SALLE RESERVEE */}
-
             {dataBooking && dataBooking.data && dataBooking.data[0] ? (
                 <div className={styles.cardHome}>
                     <h2>Salle réservée</h2>
@@ -107,11 +105,10 @@ const StudentDashboard = (): JSX.Element => {
                     <DashboardEmptyCard
                         text="Aucune réservation en cours"
                         buttonText="reserver une salle"
+                        link={"/student/rooms"}
                     />
                 </>
             )}
-
-            {/* SALLE DIPONNIBLE A LA RESA */}
             {(isLoading || !room) && (
                 <>
                     <DashboardEmptyCard text="Aucune salle n'est réservable pour le moment" />
@@ -147,8 +144,9 @@ const StudentDashboard = (): JSX.Element => {
             )}
             {open && dataBooking && dataBooking.data[0] && (
                 <ModalDelete
+                    keep="Conserver la reservation"
                     onClick={handleClose}
-                    room={room && dataBooking.data[0]}
+                    room={dataBooking && dataBooking.data[0]}
                 />
             )}
             {isLoadingDelete && <Loader />}
