@@ -6,7 +6,7 @@ import { ReactComponent as Leaf } from "assets/images/leafNotification.svg";
 import { Link } from "react-router-dom";
 
 type DashboardEmptyCardType = {
-    link: string;
+    link?: string;
     text: string;
     buttonText?: string;
 };
@@ -20,12 +20,15 @@ const DashboardEmptyCard = ({
         <div className={styles.whiteCard}>
             <Leaf className={styles.leaf} />
             <h2 className={styles.whiteCardTitle}>{text}</h2>
-            {buttonText && (
+            {buttonText && link && (
                 <Link to={link}>
                     <button className={styles.whiteCardButton}>
                         {buttonText}
                     </button>
                 </Link>
+            )}
+            {buttonText && !link && (
+                <button className={styles.whiteCardButton}>{buttonText}</button>
             )}
         </div>
     );

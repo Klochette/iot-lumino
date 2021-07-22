@@ -4,11 +4,9 @@ import styles from "./ModalDelete.module.scss";
 import { ReactComponent as CloseIcon } from "assets/images/closeModalIcon.svg";
 
 type ModalDeleteType = {
-    room?: RoomType;
-    notif?: any;
+    room: RoomType;
     title?: string;
-    cancel?: string;
-    keep?: string;
+    keep: string;
     onClick?: (
         e: React.MouseEvent<
             SVGSVGElement | HTMLDivElement | HTMLButtonElement,
@@ -17,22 +15,13 @@ type ModalDeleteType = {
         confirmed?: boolean,
         idBooking?: number
     ) => void;
-    onClickToDelete?: (
-        e: React.MouseEvent<
-            SVGSVGElement | HTMLDivElement | HTMLButtonElement,
-            MouseEvent
-        >
-    ) => void;
 };
 
 const ModalDelete = ({
     room,
-    notif,
     title,
-    cancel,
-    keep,
     onClick,
-    onClickToDelete,
+    keep,
 }: ModalDeleteType): JSX.Element => {
     return (
         <div className={styles.modal} onClick={onClick}>
@@ -42,7 +31,7 @@ const ModalDelete = ({
             >
                 <CloseIcon onClick={onClick} className={styles.icon} />
                 <div className={styles.bookedRoomImg}>
-                    <p>{room?.nameRoom ?? notif.room}</p>
+                    <p>{room.nameRoom}</p>
                 </div>
                 <h2>{title}</h2>
                 <div className={styles.divider}></div>

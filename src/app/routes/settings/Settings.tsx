@@ -24,7 +24,11 @@ const Settings = (): JSX.Element => {
             <div className={styles.header}>
                 <h1 className={styles.title}>Profil</h1>
                 <div className={styles.framePicture}>
-                    <img src={quentinG} className={styles.picture} />
+                    <img
+                        alt="profil de quentin"
+                        src={quentinG}
+                        className={styles.picture}
+                    />
                 </div>
             </div>
             <div className={styles.info}>

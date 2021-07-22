@@ -87,8 +87,8 @@ const Notifications = (): JSX.Element => {
                 <h2>Nouveau</h2>
                 {notif
                     .filter((room) => room.new)
-                    .map((el, index) => (
-                        <div>
+                    .map((el) => (
+                        <div key={el.id}>
                             <div className={styles.notificationCard}>
                                 <div
                                     className={
@@ -120,7 +120,7 @@ const Notifications = (): JSX.Element => {
                 <h2>Ancien</h2>
                 {notif
                     .filter((room) => !room.new)
-                    .map((el, index) => (
+                    .map((el) => (
                         <div>
                             <div className={styles.notificationCard}>
                                 
