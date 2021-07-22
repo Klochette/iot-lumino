@@ -12,33 +12,40 @@ import { ReactComponent as UserFilled } from "assets/images/userFilled.svg";
 import { ReactComponent as AlertFilled } from "assets/images/alertFilled.svg";
 import { ReactComponent as DoorFilled } from "assets/images/doorFilled.svg";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory ,useLocation } from "react-router-dom";
 import { useAppSelector } from "app/store";
 import { useState } from "react";
+import { useEffect } from "react";
+import { current } from "@reduxjs/toolkit";
 
 const Navbar = (): JSX.Element => {
     const { userType } = useAppSelector((state) => state.user);
-    const [location, setLocation] = useState<string|undefined>('dashboard');
+    const [location, setLocation] = useState<string>('dashboard');
+    const currentLocation = useLocation<string|undefined>()
+
+    useEffect(() => {
+        setLocation(currentLocation.pathname);
+    },[currentLocation])
 
     return (
         <div className={styles.navbar}>
-            <Link onClick={() => setLocation('dashboard')} to={`/${userType}/dashboard`}>
-                {location === 'dashboard' ?
+            <Link to={`/${userType}/dashboard`}>
+                {location.includes('dashboard') ?
                     <HomeFilled /> : <Home />
                 }
             </Link>{" "}
-            <Link onClick={() => setLocation('rooms')} to={`/${userType}/rooms`}>
-                {location === 'rooms' ?
+            <Link to={`/${userType}/rooms`}>
+                {location.includes('rooms') ?
                     <DoorFilled /> : <Door />
                 }
             </Link>{" "}
-            <Link onClick={() => setLocation('notifications')} to={`/${userType}/notifications`}>
-                {location === 'notifications' ?
+            <Link to={`/${userType}/notifications`}>
+                {location.includes('notifications') ?
                     <AlertFilled /> : <Alert />
                 }
             </Link>{" "}
-            <Link onClick={() => setLocation('settings')} to={`/${userType}/settings`}>
-                {location === 'settings' ?
+            <Link to={`/${userType}/settings`}>
+                {location.includes('settings') ?
                     <UserFilled /> : <User />
                 }
             </Link>
