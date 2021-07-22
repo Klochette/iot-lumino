@@ -99,7 +99,7 @@ const Notifications = (): JSX.Element => {
                     <div>
                         <div className={styles.notificationCard}>
                             <div className={el.isBooked ? styles.cardRoom : styles.cardRoomBooked}>
-                                <p>{el.id}</p>
+                                <p>{el.room}</p>
                             </div>
                             <div className={styles.cardRightBlock}>
                                 <p className={styles.cardMessage}>
@@ -121,7 +121,7 @@ const Notifications = (): JSX.Element => {
                     <div>
                         <div className={styles.notificationCard}>
                             <div className={el.isBooked ? styles.cardRoom : styles.cardRoomBooked}>
-                                <p>{el.id}</p>
+                                <p>{el.room}</p>
                             </div>
                             <div className={styles.cardRightBlock}>
                                 <p className={styles.cardMessage}>
