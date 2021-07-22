@@ -52,7 +52,7 @@ const RoomTemperatureCards = ({
             className={clsx(styles.temperaturesCards, styles[addColor()])}
         >
             <h2>{nameRoom}</h2>
-            <h1 className={styles.temperature}>21°</h1>
+            <h1 className={styles.temperature}>{room.Temperature}°</h1>
             <div>
                 <div className={styles.round}>
                     <input

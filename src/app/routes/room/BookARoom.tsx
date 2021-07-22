@@ -21,7 +21,8 @@ const BookARoom = (): JSX.Element => {
         useApiGetRoomQuery(idRoom);
 
     const history = useHistory();
-    const [bookARoomPost] = useApiBookARoomMutation();
+    const [bookARoomPost, { isLoading: isLoadingBookARomm }] =
+        useApiBookARoomMutation();
     const [isBooked, setIsBooked] = useState(data?.data);
 
     const [start, setStart] = useState<number | undefined>();
@@ -195,6 +196,7 @@ const BookARoom = (): JSX.Element => {
                     >
                         Réservez
                     </button>
+                    {isLoadingBookARomm && <Loader />}
                 </div>
             )}
             {(isLoading || isRoomLoading) && <Loader />}
