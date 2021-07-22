@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { CircleSlider } from "react-circle-slider";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/store";
-import { useEffect } from "react";
 import { toogleLight } from "features/lights/LightsSlice";
 
 const AdminDashboard = (): JSX.Element => {

@@ -12,47 +12,50 @@ import { ReactComponent as UserFilled } from "assets/images/userFilled.svg";
 import { ReactComponent as AlertFilled } from "assets/images/alertFilled.svg";
 import { ReactComponent as DoorFilled } from "assets/images/doorFilled.svg";
 
-import { Link, useHistory ,useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAppSelector } from "app/store";
 import { useState } from "react";
 import { useEffect } from "react";
-import { current } from "@reduxjs/toolkit";
 
 const Navbar = (): JSX.Element => {
     const { userType } = useAppSelector((state) => state.user);
-    const [location, setLocation] = useState<string>('dashboard');
-    const currentLocation = useLocation<string|undefined>()
+    const [location, setLocation] = useState<string>("dashboard");
+    const currentLocation = useLocation<string | undefined>();
 
     useEffect(() => {
         setLocation(currentLocation.pathname);
-    },[currentLocation])
+    }, [currentLocation]);
 
     return (
         <section>
-            {location.includes('login') === false &&
+            {location.includes("login") === false && (
                 <div className={styles.navbar}>
                     <Link to={`/${userType}/dashboard`}>
-                        {location.includes('dashboard') ?
-                            <HomeFilled /> : <Home />
-                        }
+                        {location.includes("dashboard") ? (
+                            <HomeFilled />
+                        ) : (
+                            <Home />
+                        )}
                     </Link>
                     <Link to={`/${userType}/rooms`}>
-                        {location.includes('rooms') ?
-                            <DoorFilled /> : <Door />
-                        }
+                        {location.includes("rooms") ? <DoorFilled /> : <Door />}
                     </Link>
                     <Link to={`/${userType}/notifications`}>
-                        {location.includes('notifications') ?
-                            <AlertFilled /> : <Alert />
-                        }
+                        {location.includes("notifications") ? (
+                            <AlertFilled />
+                        ) : (
+                            <Alert />
+                        )}
                     </Link>
                     <Link to={`/${userType}/settings`}>
-                        {location.includes('settings') ?
-                            <UserFilled /> : <User />
-                        }
+                        {location.includes("settings") ? (
+                            <UserFilled />
+                        ) : (
+                            <User />
+                        )}
                     </Link>
                 </div>
-            }
+            )}
         </section>
     );
 };

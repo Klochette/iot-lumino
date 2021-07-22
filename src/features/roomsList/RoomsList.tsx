@@ -91,7 +91,7 @@ const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
 
     useEffect(() => {
         refetch();
-    }, []);
+    }, [refetch]);
 
     const filteredRooms = filter && data && sortRoom([...data.data], filter);
     const getKeys = [];

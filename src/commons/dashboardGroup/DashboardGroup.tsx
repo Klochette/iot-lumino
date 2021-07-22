@@ -1,11 +1,5 @@
-import React, { useEffect } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
+import React from "react";
 import styles from "./DashboardGroup.module.scss";
-import { useState } from "react";
-import {
-    useApiBookARoomMutation,
-    useApiGetBokingByRoomIdQuery,
-} from "services/api/api";
 import bastien from "assets/images/bastien.png";
 import aurore from "assets/images/aurore.png";
 import quentinG from "assets/images/quentinG.png";
@@ -13,12 +7,7 @@ import reda from "assets/images/reda.png";
 import quentinT from "assets/images/quentinT.png";
 import guillaume from "assets/images/guillaume.png";
 
-// import ReactComponent from "*.png"
-// import { ReactComponent as Ppl1 }  from "assets/images/ppl1.png";
-
 const DashboardGroup = (): JSX.Element => {
-    const { userType } = useParams<{ userType?: "student" | "admin" }>();
-
     return (
         <section className={styles.whiteCard}>
             <div className={styles.wrapperTop}>
@@ -33,7 +22,7 @@ const DashboardGroup = (): JSX.Element => {
                         <div className={styles.people}>
                             <img
                                 className={styles.profilPic}
-                                alt="photo de profil"
+                                alt="de profil"
                                 src={bastien}
                             />
                             <p className={styles.peopleName}>
@@ -44,7 +33,7 @@ const DashboardGroup = (): JSX.Element => {
                         <div className={styles.people}>
                             <img
                                 className={styles.profilPic}
-                                alt="photo de profil"
+                                alt="de profil"
                                 src={quentinG}
                             />
                             <p className={styles.peopleName}>
@@ -55,7 +44,7 @@ const DashboardGroup = (): JSX.Element => {
                         <div className={styles.people}>
                             <img
                                 className={styles.profilPic}
-                                alt="photo de profil"
+                                alt="de profil"
                                 src={aurore}
                             />
                             <p className={styles.peopleName}>
@@ -66,7 +55,7 @@ const DashboardGroup = (): JSX.Element => {
                         <div className={styles.people}>
                             <img
                                 className={styles.profilPic}
-                                alt="photo de profil"
+                                alt="de profil"
                                 src={quentinT}
                             />
                             <p className={styles.peopleName}>
@@ -77,7 +66,7 @@ const DashboardGroup = (): JSX.Element => {
                         <div className={styles.people}>
                             <img
                                 className={styles.profilPic}
-                                alt="photo de profil"
+                                alt="de profil"
                                 src={guillaume}
                             />
                             <p className={styles.peopleName}>
@@ -89,7 +78,7 @@ const DashboardGroup = (): JSX.Element => {
                         <div className={styles.people}>
                             <img
                                 className={styles.profilPic}
-                                alt="photo de profil"
+                                alt="de profil"
                                 src={reda}
                             />
                             <p className={styles.peopleName}>
