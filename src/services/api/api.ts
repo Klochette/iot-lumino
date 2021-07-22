@@ -5,7 +5,7 @@ import { BookARoomType, QueryBookingFromARoomType, QueryRoomType } from "types";
 export const api = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://api-oit.herokuapp.com",
+        baseUrl: "http://35.180.13.188",
     }),
     endpoints: (builder) => ({
         apiRooms: builder.query<QueryRoomType, undefined>({
@@ -24,12 +24,18 @@ export const api = createApi({
         apiGetBokingByRoomId: builder.query({
             query: (roomId) => `/getBookingByRoomId/${roomId}`,
         }),
-        apiDeleteBooking: builder.query({
-            query: (queryArg) =>
-                `/removeABooking/${queryArg.idBooking}/${queryArg.idRoom}`,
+        apiDeleteBooking: builder.mutation({
+            query: (queryArg) => ({
+                url: "/removeABooking",
+                method: "POST",
+                body: queryArg,
+            }),
         }),
         apiGetRoom: builder.query({
             query: (roomId) => `/getRoomInfoByIdRoom/${roomId}`,
+        }),
+        apiGetBookingByEmail: builder.query({
+            query: (email) => `getBookingByEmail/${email}`,
         }),
     }),
 });
@@ -38,8 +44,9 @@ export const {
     useApiRoomsQuery,
     useApiBookingFromARoomQuery,
     useApiGetBokingByRoomIdQuery,
-    useApiDeleteBookingQuery,
     useApiGetRoomQuery,
+    useApiGetBookingByEmailQuery,
     //POST
+    useApiDeleteBookingMutation,
     useApiBookARoomMutation,
 } = api;

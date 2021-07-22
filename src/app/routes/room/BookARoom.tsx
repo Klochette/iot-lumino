@@ -135,64 +135,74 @@ const BookARoom = (): JSX.Element => {
                 <div className={styles.topWrapper__book}>
                     <h1>Réservations</h1>
                 </div>
-                <div className={styles.topWrapper__room}>
-                    <p className={styles.room}>Salle</p>
-                    <p className={styles.roomName}>
-                        {roomData?.data[0].nameRoom}
-                    </p>
-                </div>
-            </div>
-            <div className={styles.bottomWrapper}>
-                {error && (
-                    <p className={styles.errorMsg}>
-                        Ce créneau horaire n'est pas disponible, veuillez en
-                        sélectionner un autre.
-                    </p>
+                {!isLoading && !isRoomLoading && (
+                    <>
+                        <div className={styles.topWrapper__room}>
+                            <p className={styles.room}>Salle</p>
+                            <p className={styles.roomName}>
+                                {roomData?.data[0].nameRoom}
+                            </p>
+                        </div>
+                    </>
                 )}
-                <p className={styles.bottomWrapper__start}>
-                    {start
-                        ? "Sélectionnez votre départ"
-                        : "Sélectionnez votre arrivée"}
-                </p>
-                <ul className={styles.bottomWrapper__list}>
-                    {isBooked &&
-                        Object.keys(isBooked).map(function (key: any, index) {
-                            return (
-                                <li
-                                    key={key}
-                                    className={clsx(
-                                        styles.bottomWrapper__listItem,
-                                        styles[isBooked[key]]
-                                    )}
-                                    onClick={() => {
-                                        fixStartEnd(Number(key));
-
-                                        isBooked[key] === "userBooked"
-                                            ? setIsBooked({
-                                                  ...isBooked,
-                                                  [key]: false,
-                                              })
-                                            : setIsBooked({
-                                                  ...isBooked,
-                                                  [key]: "userBooked",
-                                              });
-                                    }}
-                                >
-                                    {key}:00
-                                </li>
-                            );
-                        })}
-                </ul>
-
-                <button
-                    className={styles.ctn}
-                    onClick={() => {
-                        bookARoom();
-                    }}
-                >
-                    Réservez
-                </button>
             </div>
+            {!isLoading && !isRoomLoading && (
+                <div className={styles.bottomWrapper}>
+                    {error && (
+                        <p className={styles.errorMsg}>
+                            Ce créneau horaire n'est pas disponible, veuillez en
+                            sélectionner un autre.
+                        </p>
+                    )}
+                    <p className={styles.bottomWrapper__start}>
+                        {start
+                            ? "Sélectionnez votre départ"
+                            : "Sélectionnez votre arrivée"}
+                    </p>
+                    <ul className={styles.bottomWrapper__list}>
+                        {isBooked &&
+                            Object.keys(isBooked).map(function (
+                                key: any,
+                                index
+                            ) {
+                                return (
+                                    <li
+                                        key={key}
+                                        className={clsx(
+                                            styles.bottomWrapper__listItem,
+                                            styles[isBooked[key]]
+                                        )}
+                                        onClick={() => {
+                                            fixStartEnd(Number(key));
+
+                                            isBooked[key] === "userBooked"
+                                                ? setIsBooked({
+                                                      ...isBooked,
+                                                      [key]: false,
+                                                  })
+                                                : setIsBooked({
+                                                      ...isBooked,
+                                                      [key]: "userBooked",
+                                                  });
+                                        }}
+                                    >
+                                        {key}:00
+                                    </li>
+                                );
+                            })}
+                    </ul>
+
+                    <button
+                        className={styles.ctn}
+                        onClick={() => {
+                            bookARoom();
+                        }}
+                    >
+                        Réservez
+                    </button>
+                </div>
+            )}
+            {(isLoading || isRoomLoading) && <Loader />}
         </section>
     );
 };
