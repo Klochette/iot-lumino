@@ -3,6 +3,8 @@ import styles from "./StudentDashboard.module.scss";
 import { ReactComponent as CloseIcon } from "assets/images/close-circle.svg";
 import Loader from "commons/loader/Loader";
 import ModalDelete from "features/modalDelete/ModalDelete";
+import DashboardGroup from "../../commons/dashboardGroup/DashboardGroup";
+
 import { useState } from "react";
 import DashboardEmptyCard from "commons/dashboardEmptyCards/DashboardEmptyCards";
 import DashboardAvailableRooms from "commons/dashboardAvailableRooms/DashboardAvailableRooms";
@@ -153,6 +155,9 @@ const StudentDashboard = (): JSX.Element => {
                 </div>
             )}
             {isLoadingRooms && <Loader />}
+
+            {/* GROUP */}
+            <DashboardGroup />
 
             {/* AUCUNE SALLE RESERVEE */}
             <DashboardEmptyCard
