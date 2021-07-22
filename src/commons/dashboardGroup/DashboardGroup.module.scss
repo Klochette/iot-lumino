@@ -23,11 +23,6 @@
         text-align: left;
     }
 
-    .whiteCardEdit {
-        margin-left: 0.5rem;
-        @include text-style($grey-dark);
-    }
-
     .wrapperTopGroup {
         position: relative;
         display: flex;
@@ -38,15 +33,13 @@
         margin-bottom: 0.8rem;
 
         &::after {
-            content: '';
+            content: "";
             position: absolute;
             top: 0;
             right: 0;
             height: 100%;
-            width: 15%;
-            background: linear-gradient(
-                90deg
-                ,hsla(0,0%,100%,0) 0,#fff);
+            width: 8%;
+            background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff);
         }
 
         .wrapperGroupName {
@@ -60,15 +53,17 @@
             overflow: hidden;
             position: relative;
             &::before {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 0;
                 left: 0;
                 height: 100%;
                 width: 5%;
-                background: linear-gradient(
-                    268deg
-                    , rgba(255, 255, 255, 0) 0, #fff);
+                // background: linear-gradient(
+                //     268deg,
+                //     rgba(255, 255, 255, 0) 0,
+                //     #fff
+                // );
             }
         }
 
@@ -76,13 +71,14 @@
             display: flex;
             gap: 0.5rem;
             overflow: scroll;
+            padding-right: 0.5rem;
 
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
         .peopleGroup::-webkit-scrollbar {
             display: none;
-          }
+        }
 
         .groupName {
             display: flex;
@@ -101,13 +97,16 @@
             align-items: center;
         }
 
+        .profilPic {
+            width: 40px;
+        }
+
         .peopleName {
             margin-top: 0.5rem;
             text-align: center;
             font-size: 10px;
         }
     }
-
 
     .whiteCardButton {
         background-color: $blue-grey;

@@ -3,7 +3,7 @@ import { userSliceType } from "types";
 
 const initialState: userSliceType = {
     userType: "student",
-    email: "nawel.borini@hetic.fr",
+    email: "nawel.borini@hetic.net",
     identifier: "Nawel Borini",
     password: "gogog",
 };

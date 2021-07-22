@@ -2,14 +2,19 @@ import React, { useEffect } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 import styles from "./DashboardGroup.module.scss";
 import { useState } from "react";
-import { useApiBookARoomMutation, useApiGetBokingByRoomIdQuery } from "services/api/api";
+import {
+    useApiBookARoomMutation,
+    useApiGetBokingByRoomIdQuery,
+} from "services/api/api";
+import bastien from "assets/images/bastien.png";
+import aurore from "assets/images/aurore.png";
+import quentinG from "assets/images/quentinG.png";
+import reda from "assets/images/reda.png";
+import quentinT from "assets/images/quentinT.png";
+import guillaume from "assets/images/guillaume.png";
 
 // import ReactComponent from "*.png"
 // import { ReactComponent as Ppl1 }  from "assets/images/ppl1.png";
-import { ReactComponent as PeopleFirst } from "assets/images/peopleFirst.svg";
-import { ReactComponent as PeopleSecond } from "assets/images/peopleSecond.svg";
-import { ReactComponent as PeopleThird } from "assets/images/peopleThird.svg";
-
 
 const DashboardGroup = (): JSX.Element => {
     const { userType } = useParams<{ userType?: "student" | "admin" }>();
@@ -18,7 +23,6 @@ const DashboardGroup = (): JSX.Element => {
         <section className={styles.whiteCard}>
             <div className={styles.wrapperTop}>
                 <h2 className={styles.whiteCardTitle}>Mes groupes</h2>
-                <p className={styles.whiteCardEdit}>Éditer</p>
             </div>
             <div className={styles.wrapperTopGroup}>
                 <div className={styles.wrapperGroupName}>
@@ -27,28 +31,71 @@ const DashboardGroup = (): JSX.Element => {
                 <div className={styles.wrappperAfter}>
                     <div className={styles.peopleGroup}>
                         <div className={styles.people}>
-                            <PeopleFirst />
-                            <p className={styles.peopleName}>Bastien<br /> BAQUIER</p>
+                            <img
+                                className={styles.profilPic}
+                                alt="photo de profil"
+                                src={bastien}
+                            />
+                            <p className={styles.peopleName}>
+                                Bastien
+                                <br /> BAQUIER
+                            </p>
                         </div>
                         <div className={styles.people}>
-                            <PeopleSecond />
-                            <p className={styles.peopleName}>Quentin<br /> GANCHER</p>
+                            <img
+                                className={styles.profilPic}
+                                alt="photo de profil"
+                                src={quentinG}
+                            />
+                            <p className={styles.peopleName}>
+                                Quentin
+                                <br /> GANCHER
+                            </p>
                         </div>
                         <div className={styles.people}>
-                            <PeopleThird />
-                            <p className={styles.peopleName}>Aurore<br /> VILAR</p>
+                            <img
+                                className={styles.profilPic}
+                                alt="photo de profil"
+                                src={aurore}
+                            />
+                            <p className={styles.peopleName}>
+                                Aurore
+                                <br /> VILAR
+                            </p>
                         </div>
                         <div className={styles.people}>
-                            <PeopleFirst />
-                            <p className={styles.peopleName}>Quentin<br /> PEDRU</p>
+                            <img
+                                className={styles.profilPic}
+                                alt="photo de profil"
+                                src={quentinT}
+                            />
+                            <p className={styles.peopleName}>
+                                Quentin
+                                <br /> PERDU
+                            </p>
                         </div>
                         <div className={styles.people}>
-                            <PeopleSecond />
-                            <p className={styles.peopleName}>Guillaume<br /> RAK-LECER</p>
+                            <img
+                                className={styles.profilPic}
+                                alt="photo de profil"
+                                src={guillaume}
+                            />
+                            <p className={styles.peopleName}>
+                                Guillaume
+                                <br />
+                                RAK-LECER
+                            </p>
                         </div>
                         <div className={styles.people}>
-                            <PeopleThird />
-                            <p className={styles.peopleName}>Reda<br /> HANOUCHE</p>
+                            <img
+                                className={styles.profilPic}
+                                alt="photo de profil"
+                                src={reda}
+                            />
+                            <p className={styles.peopleName}>
+                                Reda
+                                <br /> HAMOUFE
+                            </p>
                         </div>
                     </div>
                 </div>
