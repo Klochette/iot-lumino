@@ -15,6 +15,7 @@ import { ReactComponent as ArrowUp } from "assets/images/bi_three-dots.svg";
 import { ReactComponent as ArrowDown } from "assets/images/arrowDown.svg";
 import { Link, useParams } from "react-router-dom";
 import Loader from "commons/loader/Loader";
+import { useEffect } from "react";
 
 type RoomProps = { room: RoomType };
 
@@ -25,7 +26,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
     const { nameRoom, nbPlace, freeAccess, id_room, isBooked, nbPlaceTotal } =
         room;
 
-    const { data, isLoading } = useApiBookingFromARoomQuery(nameRoom);
+    const { data, isLoading, refetch } = useApiBookingFromARoomQuery(nameRoom);
     const { data: roomBooking, isLoading: roomBookingLoading } =
         useApiGetBokingByRoomIdQuery(id_room);
     const getIsFullBooked = () => {
@@ -35,6 +36,10 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
             }
         return true;
     };
+
+    useEffect(() => {
+        refetch();
+    }, []);
 
     const getIsEmpty = () => {
         if (roomBooking && roomBooking.data)
@@ -59,8 +64,6 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
             }
         }
     };
-
-    console.log(room);
 
     return (
         <>
@@ -127,7 +130,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                                             !isLoading && <p>Loading</p>}
                                     </ul>
                                     <Link
-                                        to={`/${userType}/rooms/${room.id_room}/book`}
+                                        to={`/${userType}/rooms/${room.nameRoom}/${room.id_room}/book`}
                                     >
                                         <button
                                             className={styles[addColor()]}

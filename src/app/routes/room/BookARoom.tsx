@@ -12,10 +12,12 @@ import Loader from "commons/loader/Loader";
 import clsx from "clsx";
 import { useHistory, useParams } from "react-router-dom";
 import { UserType } from "types";
+import { useAppSelector } from "app/store";
 
 const BookARoom = (): JSX.Element => {
     const { userType, idRoom, nameRoom } =
         useParams<{ userType?: UserType; idRoom: string; nameRoom: string }>();
+    const { email } = useAppSelector((state) => state.user);
     const { data, isLoading } = useApiGetBokingByRoomIdQuery(idRoom);
     const { data: roomData, isLoading: isRoomLoading } =
         useApiGetRoomQuery(idRoom);
@@ -30,7 +32,7 @@ const BookARoom = (): JSX.Element => {
 
     const bookARoom = async () => {
         try {
-            if (start) {
+            if (start && email) {
                 const a = start.toString();
                 const b = end?.toString();
                 const booking = {
@@ -39,7 +41,7 @@ const BookARoom = (): JSX.Element => {
                         ? (Number(b) + 1).toString()
                         : (Number(a) + 1).toString(),
                     nameRoom: nameRoom,
-                    studentEmail: "nawel.borini@hetic.net",
+                    studentEmail: email,
                 };
                 await bookARoomPost(booking)
                     .unwrap()

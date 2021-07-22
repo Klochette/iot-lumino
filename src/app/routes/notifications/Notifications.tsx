@@ -47,7 +47,6 @@ const Notifications = (): JSX.Element => {
     ];
 
     const [notif, setNotif] = useState(notifUser);
-    console.log(notifUser);
 
     const handleOpen = () => {
         if (!open) {
@@ -123,23 +122,23 @@ const Notifications = (): JSX.Element => {
                     .map((el) => (
                         <div>
                             <div className={styles.notificationCard}>
-                                
-                                        {el.picture ? 
-                                        <img
+                                {el.picture ? (
+                                    <img
                                         className={styles.profilPic}
                                         alt="photo de profil"
                                         src={bastien}
-                                        /> : 
-                                        <div
+                                    />
+                                ) : (
+                                    <div
                                         className={
                                             el.isBooked
                                                 ? styles.cardRoom
                                                 : styles.cardRoomBooked
-                                    }
+                                        }
                                     >
                                         <p>{el.room}</p>
-                                        </div>
-                                    }
+                                    </div>
+                                )}
                                 <div className={styles.cardRightBlock}>
                                     <p className={styles.cardMessage}>
                                         {el.title}
