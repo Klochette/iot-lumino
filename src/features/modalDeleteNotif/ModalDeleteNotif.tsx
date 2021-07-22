@@ -1,9 +1,9 @@
 import React from "react";
 import { RoomType } from "types";
-import styles from "./ModalDelete.module.scss";
+import styles from "./ModalDeleteNotif.module.scss";
 import { ReactComponent as CloseIcon } from "assets/images/closeModalIcon.svg";
 
-type ModalDeleteType = {
+type ModalDeleteNotifType = {
     room?: RoomType;
     notif?: any;
     title?: string;
@@ -25,7 +25,7 @@ type ModalDeleteType = {
     ) => void;
 };
 
-const ModalDelete = ({
+const ModalDeleteNotif = ({
     room,
     notif,
     title,
@@ -33,7 +33,7 @@ const ModalDelete = ({
     keep,
     onClick,
     onClickToDelete,
-}: ModalDeleteType): JSX.Element => {
+}: ModalDeleteNotifType): JSX.Element => {
     return (
         <div className={styles.modal} onClick={onClick}>
             <div
@@ -46,13 +46,8 @@ const ModalDelete = ({
                 </div>
                 <h2>{title}</h2>
                 <div className={styles.divider}></div>
-                <p
-                    className={styles.cancel}
-                    onClick={(e) =>
-                        onClick && onClick(e, true, room?.id_booking)
-                    }
-                >
-                    Annuler la réservation
+                <p className={styles.cancel} onClick={onClickToDelete}>
+                    {cancel}
                 </p>
                 <button className={styles.keep} onClick={onClick}>
                     {keep}
@@ -62,4 +57,4 @@ const ModalDelete = ({
     );
 };
 
-export default ModalDelete;
+export default ModalDeleteNotif;
