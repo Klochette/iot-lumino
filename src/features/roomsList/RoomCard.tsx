@@ -37,10 +37,6 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
         return true;
     };
 
-    useEffect(() => {
-        refetch();
-    }, [refetch]);
-
     const getIsEmpty = () => {
         if (roomBooking && roomBooking.data)
             for (const key in roomBooking.data) {
@@ -68,7 +64,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
     return (
         <>
             {!isLoading && !roomBookingLoading && (
-                <div className={styles.accordion}>
+                <div className={styles.accordion} onClick={() => refetch()}>
                     <div
                         className={clsx(
                             styles.title,
