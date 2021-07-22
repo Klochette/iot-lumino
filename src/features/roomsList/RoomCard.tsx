@@ -22,7 +22,8 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
     const { userType } = useParams<{ userType?: UserType }>();
     const [isOpen, setOpen] = useState(false);
 
-    const { nameRoom, nbPlace, freeAccess, id_room, isBooked } = room;
+    const { nameRoom, nbPlace, freeAccess, id_room, isBooked, nbPlaceTotal } =
+        room;
 
     const { data, isLoading } = useApiBookingFromARoomQuery(nameRoom);
     const { data: roomBooking, isLoading: roomBookingLoading } =
@@ -51,13 +52,15 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
             return "yellow";
         } else {
             //@ts-ignore
-            if (isBooked || isFullBooked || room.nbPlace === 0) {
+            if (isBooked || isFullBooked || nbPlaceTotal === 0) {
                 return "red";
             } else {
                 return "green";
             }
         }
     };
+
+    console.log(room);
 
     return (
         <>
@@ -78,7 +81,9 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                                 styles[addColor()]
                             )}
                         >
-                            <h2>{nbPlace}/50</h2>
+                            <h2>
+                                {nbPlace - nbPlaceTotal}/{nbPlace}
+                            </h2>
                             {isOpen && <ArrowUp className={styles.icon} />}
                             {!isOpen && <ArrowDown />}
                         </div>

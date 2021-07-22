@@ -25,6 +25,7 @@ export type RoomType = {
     building: string;
     id_booking: number;
     Temperature: number;
+    nbPlaceTotal: number;
 };
 
 export type QueryRoomType = {
