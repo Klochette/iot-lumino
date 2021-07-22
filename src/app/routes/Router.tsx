@@ -6,8 +6,6 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Cgu from "./CGU/CGU";
 import ChangePassword from "./changePassword/ChangePassword";
 import Dashboard from "./dashboard/Dashboard";
-import EditConfidentiality from "./editConfidentiality/EditConfidentiality";
-import EditGroups from "./editGroups/EditGroups";
 import Login from "./login/Login";
 import NotFound from "./notFound/NotFound";
 import Notifications from "./notifications/Notifications";
@@ -41,8 +39,11 @@ const Router = (): JSX.Element => {
                 <Route exact path={"/:userType/rooms"}>
                     <PrivateRoute userType={userType} component={<Rooms />} />
                 </Route>
-                <Route exact path={"/:userType/rooms/book"}>
-                    <PrivateRoute userType={userType} component={<BookARoom />} />
+                <Route exact path={"/:userType/rooms/:idRoom/book"}>
+                    <PrivateRoute
+                        userType={userType}
+                        component={<BookARoom />}
+                    />
                 </Route>
                 <Route exact path={"/:userType/notifications"}>
                     <PrivateRoute
@@ -60,21 +61,6 @@ const Router = (): JSX.Element => {
                     <PrivateRoute
                         userType={userType}
                         component={<ChangePassword />}
-                    />
-                </Route>
-                <Route exact path={"/:userType/settings/groups"}>
-                    <PrivateRoute
-                        userType={userType}
-                        component={<EditGroups />}
-                    />
-                </Route>
-                <Route
-                    exact
-                    path={"/:userType/settings/preferences/confidentiality"}
-                >
-                    <PrivateRoute
-                        userType={userType}
-                        component={<EditConfidentiality />}
                     />
                 </Route>
                 <Route exact path={"/:userType/settings/preferences/cgu"}>

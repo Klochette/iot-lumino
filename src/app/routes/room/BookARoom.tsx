@@ -4,30 +4,51 @@ import { useState } from "react";
 import {
     useApiBookARoomMutation,
     useApiGetBokingByRoomIdQuery,
+    useApiGetRoomQuery,
 } from "services/api/api";
 
 import clsx from "clsx";
+import { useHistory, useParams } from "react-router-dom";
+import { UserType } from "types";
 
 const BookARoom = (): JSX.Element => {
-    const { data, isLoading } = useApiGetBokingByRoomIdQuery(4);
+    const { userType, idRoom } =
+        useParams<{ userType?: UserType; idRoom?: string }>();
+    const { data, isLoading } = useApiGetBokingByRoomIdQuery(idRoom);
+    const { data: roomData, isLoading: isRoomLoading } =
+        useApiGetRoomQuery(idRoom);
+
+    console.log(roomData);
+    console.log(data);
+    const history = useHistory();
     const [bookARoomPost] = useApiBookARoomMutation();
     const [isBooked, setIsBooked] = useState(data?.data);
 
     const [start, setStart] = useState<number | undefined>();
     const [end, setEnd] = useState<number | undefined>();
 
+    console.log(isBooked);
+
     const bookARoom = async () => {
         try {
-            if (start && end) {
+            if (start) {
                 const a = start.toString();
-                const b = end.toString();
+                const b = end?.toString();
                 const booking = {
                     start: a,
-                    end: b,
-                    nameRoom: "A105",
+                    end: b
+                        ? (Number(b) + 1).toString()
+                        : (Number(a) + 1).toString(),
+                    nameRoom: "B111",
                     studentEmail: "nawel.borini@hetic.net",
                 };
-                await bookARoomPost(booking).unwrap();
+                await bookARoomPost(booking)
+                    .unwrap()
+                    .then(
+                        (onFulfilled) =>
+                            onFulfilled &&
+                            history.push(`/${userType}/dashboard`)
+                    );
             }
         } catch (error) {
             console.log(error);
@@ -35,10 +56,9 @@ const BookARoom = (): JSX.Element => {
     };
 
     const [error, setError] = useState<Boolean | undefined>(false);
-
+    console.log(start, end);
     const fixStartEnd = (int: any) => {
         if (start !== undefined && Number(int) > start) {
-            console.log(int, start);
             setEnd(int);
         }
 
@@ -111,11 +131,13 @@ const BookARoom = (): JSX.Element => {
         <section className={styles.section}>
             <div className={styles.topWrapper}>
                 <div className={styles.topWrapper__book}>
-                    <h1>Reservation</h1>
+                    <h1>Réservations</h1>
                 </div>
                 <div className={styles.topWrapper__room}>
                     <p className={styles.room}>Salle</p>
-                    <p className={styles.roomName}>A10</p>
+                    <p className={styles.roomName}>
+                        {roomData?.data[0].nameRoom}
+                    </p>
                 </div>
             </div>
             <div className={styles.bottomWrapper}>
@@ -126,7 +148,7 @@ const BookARoom = (): JSX.Element => {
                     </p>
                 )}
                 <p className={styles.bottomWrapper__start}>
-                    {start === undefined
+                    {start
                         ? "Sélectionnez votre départ"
                         : "Sélectionnez votre arrivée"}
                 </p>
@@ -135,6 +157,7 @@ const BookARoom = (): JSX.Element => {
                         Object.keys(isBooked).map(function (key: any, index) {
                             return (
                                 <li
+                                    key={key}
                                     className={clsx(
                                         styles.bottomWrapper__listItem,
                                         styles[isBooked[key]]
