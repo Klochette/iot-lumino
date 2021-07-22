@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./DashboardAvailableRooms.module.scss";
-import { ReactComponent as Chevron } from "assets/images/bi_three-dots.svg";
+import { ReactComponent as RightArrow } from "assets/images/right-arrow.svg";
 
 import { RoomType } from "types";
 
@@ -20,9 +20,9 @@ const DashboardAvailableRooms = ({
 }: DashboardAvailableRoomsType): JSX.Element => {
     return (
         <>
-            <div>
+            <div className={styles.titleWrap}>
                 <h2>{title}</h2>
-                <Chevron className={styles.chevron} />
+                <RightArrow className={styles.chevron} />
             </div>
             {rooms && rooms.length > 0 ? (
                 <div
