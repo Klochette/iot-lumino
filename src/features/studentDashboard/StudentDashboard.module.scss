@@ -2,9 +2,11 @@
 
 /** SALLE RESERVEE **/
 .cardHome {
+    position: relative;
     background-color: $white;
     border-radius: 9px;
     width: 86vw;
+    min-height: 100px;
     height: auto;
     margin: 0 auto 14px auto;
     padding: 14px 14px;

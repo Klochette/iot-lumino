@@ -78,10 +78,12 @@
         .cardMessage {
             @include text-style($text);
             padding-bottom: 5px;
+            padding-left: 0.5rem;
         }
 
         .cardTime {
             @include text-style($blue_light);
+            padding-left: 0.5rem;
         }
     }
 

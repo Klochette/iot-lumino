@@ -5,6 +5,10 @@ import { ReactComponent as CloseIcon } from "assets/images/closeModalIcon.svg";
 
 type ModalDeleteType = {
     room?: RoomType;
+    notif?: any;
+    title: string; 
+    cancel: string; 
+    keep: string;
     onClick: (
         e: React.MouseEvent<
             SVGSVGElement | HTMLDivElement | HTMLButtonElement,
@@ -13,9 +17,15 @@ type ModalDeleteType = {
         confirmed?: boolean,
         idBooking?: number
     ) => void;
+    onClickToDelete: (
+        e: React.MouseEvent<
+            SVGSVGElement | HTMLDivElement | HTMLButtonElement,
+            MouseEvent
+        >
+    ) => void;
 };
 
-const ModalDelete = ({ room, onClick }: ModalDeleteType): JSX.Element => {
+const ModalDelete = ({ room, notif, title, cancel, keep, onClick, onClickToDelete }: ModalDeleteType): JSX.Element => {
     return (
         <div className={styles.modal} onClick={onClick}>
             <div
@@ -24,18 +34,20 @@ const ModalDelete = ({ room, onClick }: ModalDeleteType): JSX.Element => {
             >
                 <CloseIcon onClick={onClick} className={styles.icon} />
                 <div className={styles.bookedRoomImg}>
-                    <p>{room?.nameRoom}</p>
+                    <p>{room?.nameRoom ?? notif.room}</p>
                 </div>
-                <h2>Souhaitez-vous annuler la réservation ?</h2>
+                <h2>{title}</h2>
                 <div className={styles.divider}></div>
                 <p
                     className={styles.cancel}
                     onClick={(e) => onClick(e, true, room?.id_booking)}
                 >
                     Annuler la réservation
-                </p>
+                {/* <p className={styles.cancel} onClick={onClickToDelete}>
+                    {cancel}
+                </p> */}
                 <button className={styles.keep} onClick={onClick}>
-                    Garder la réservation
+                    {keep}
                 </button>
             </div>
         </div>
