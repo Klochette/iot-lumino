@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Settings.module.scss";
-import { ReactComponent as Pdp } from "assets/images/pdp.svg";
+import quentinG from "assets/images/quentinG.png";
 import { useAppDispatch, useAppSelector } from "app/store";
 import Switch from "commons/switch/Switch";
 
@@ -24,7 +24,7 @@ const Settings = (): JSX.Element => {
             <div className={styles.header}>
                 <h1 className={styles.title}>Profil</h1>
                 <div className={styles.framePicture}>
-                    <Pdp className={styles.picture} />
+                    <img src={quentinG} className={styles.picture} />
                 </div>
             </div>
             <div className={styles.info}>
