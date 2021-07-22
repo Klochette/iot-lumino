@@ -28,3 +28,13 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+
+## Contributors
+
+- [Melina Chamayou](https://github.com/Klochette) :sparkles:
+- [Constance Petillot](https://github.com/cpetillot) :pencil:
+- [Camy Cerin](https://github.com/CamyCerin) :art:
+- [Hugo Borini](https://github.com/hugoborini) :penguin:
+- [Hugo Cordillot](https://github.com/Hgo0123) :alembic:
+- [Nawel Berrichi](https://github.com/berrichinawel) :fire:
