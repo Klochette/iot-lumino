@@ -2,6 +2,10 @@ export type ThemeSliceType = {
     isDarkMode: boolean;
 };
 
+export type LightsSliceType = {
+    isOn: boolean;
+};
+
 export type UserType = "admin" | "student";
 
 export type userSliceType = {

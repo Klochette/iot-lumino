@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useRef } from "react";
 import DashboardAdminCard from "./DashboardAdminCard";
 import styles from "./AdminDashboard.module.scss";
 import { ReactComponent as Light } from "assets/images/ic_outline-light.svg";
 import { Link } from "react-router-dom";
 import { CircleSlider } from "react-circle-slider";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "app/store";
+import { useEffect } from "react";
+import { toogleLight } from "features/lights/LightsSlice";
 
 const AdminDashboard = (): JSX.Element => {
     const [value, setValue] = useState(0);
+    const dispatch = useAppDispatch();
+    const { isOn } = useAppSelector((state) => state.lights);
+    const [counter, setCounter] = useState(6);
 
     const onChangeValue = (e: number) => {
         setValue(e);
+    };
+
+    const countRef = useRef(null);
+
+    const handleLights = () => {
+        setCounter(counter - 1);
+        //@ts-ignore
+        countRef.current = setInterval(() => {
+            //@ts-ignore
+            setCounter((timer) => {
+                if (timer > 0) return timer - 1;
+            });
+        }, 1000);
+        setTimeout(() => {
+            dispatch(toogleLight());
+            //@ts-ignore
+            clearInterval(countRef.current);
+            setCounter(6);
+        }, 5000);
     };
 
     return (
@@ -18,8 +43,30 @@ const AdminDashboard = (): JSX.Element => {
             <DashboardAdminCard variant="dark">
                 <>
                     <div className={styles.turnOffLights}>
-                        <h2>Éteindre toutes les lumières ?</h2>
-                        <button>Éteindre</button>
+                        {isOn && counter === 6 && (
+                            <>
+                                <h2>Éteindre toutes les lumières ?</h2>
+                                <button onClick={handleLights}>Éteindre</button>
+                            </>
+                        )}
+                        {!isOn && counter === 6 && (
+                            <>
+                                <h2>Allumer toutes les lumières ?</h2>
+                                <button onClick={handleLights}>Allumer</button>
+                            </>
+                        )}
+                        {isOn && counter !== 6 && counter !== 0 && (
+                            <h2>
+                                Toutes les lumières vont s'éteindre dans{" "}
+                                <span>{counter}</span>s
+                            </h2>
+                        )}
+                        {!isOn && counter !== 6 && counter !== 0 && (
+                            <h2>
+                                Toutes les lumières vont s'allumer dans{" "}
+                                <span>{counter}</span>s
+                            </h2>
+                        )}
                     </div>
                     <Light className={styles.iconLight} />
                 </>

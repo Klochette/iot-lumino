@@ -7,15 +7,22 @@
     justify-content: space-between;
     min-height: 90px;
     height: auto;
+    position: relative;
 
     &.dark {
         background-color: $text;
+        height: 100px;
 
         h2 {
             color: $white;
+            margin-right: 93px;
         }
         button {
             background-color: $peach;
+            margin-right: 93px;
+        }
+        span {
+            color: $peach;
         }
     }
 

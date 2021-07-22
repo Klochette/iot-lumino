@@ -162,10 +162,12 @@ const StudentDashboard = (): JSX.Element => {
             <DashboardEmptyCard
                 text="Aucune réservation en cours"
                 buttonText="Réserver une salle"
+                link="/student/rooms"
             />
             <DashboardEmptyCard
                 text="Tu n'as pas de groupe pour le moment"
                 buttonText="Ajouter un groupe"
+                link="/student/dashboard"
             />
 
             {open && (

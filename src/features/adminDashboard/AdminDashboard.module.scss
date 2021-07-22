@@ -3,6 +3,9 @@
 .icon {
     &Light {
         margin-left: 10px;
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 }
 
@@ -11,8 +14,8 @@
     flex-direction: column;
     justify-content: center;
     padding: 13px;
-    flex-grow: 1;
     align-items: center;
+    flex-grow: 1;
 
     button {
         margin-top: 15px;

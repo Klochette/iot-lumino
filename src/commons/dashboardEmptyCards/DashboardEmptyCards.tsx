@@ -3,15 +3,16 @@ import React from "react";
 import styles from "./DashboardEmptyCards.module.scss";
 
 import { ReactComponent as Leaf } from "assets/images/leafNotification.svg";
+import { Link } from "react-router-dom";
 
 type DashboardEmptyCardType = {
-    onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    link: string;
     text: string;
     buttonText?: string;
 };
 
 const DashboardEmptyCard = ({
-    onClick,
+    link,
     text,
     buttonText,
 }: DashboardEmptyCardType): JSX.Element => {
@@ -20,9 +21,11 @@ const DashboardEmptyCard = ({
             <Leaf className={styles.leaf} />
             <h2 className={styles.whiteCardTitle}>{text}</h2>
             {buttonText && (
-                <button onClick={onClick} className={styles.whiteCardButton}>
-                    {buttonText}
-                </button>
+                <Link to={link}>
+                    <button className={styles.whiteCardButton}>
+                        {buttonText}
+                    </button>
+                </Link>
             )}
         </div>
     );
