@@ -28,28 +28,32 @@ const Navbar = (): JSX.Element => {
     },[currentLocation])
 
     return (
-        <div className={styles.navbar}>
-            <Link to={`/${userType}/dashboard`}>
-                {location.includes('dashboard') ?
-                    <HomeFilled /> : <Home />
-                }
-            </Link>{" "}
-            <Link to={`/${userType}/rooms`}>
-                {location.includes('rooms') ?
-                    <DoorFilled /> : <Door />
-                }
-            </Link>{" "}
-            <Link to={`/${userType}/notifications`}>
-                {location.includes('notifications') ?
-                    <AlertFilled /> : <Alert />
-                }
-            </Link>{" "}
-            <Link to={`/${userType}/settings`}>
-                {location.includes('settings') ?
-                    <UserFilled /> : <User />
-                }
-            </Link>
-        </div>
+        <section>
+            {location.includes('login') === false &&
+                <div className={styles.navbar}>
+                    <Link to={`/${userType}/dashboard`}>
+                        {location.includes('dashboard') ?
+                            <HomeFilled /> : <Home />
+                        }
+                    </Link>
+                    <Link to={`/${userType}/rooms`}>
+                        {location.includes('rooms') ?
+                            <DoorFilled /> : <Door />
+                        }
+                    </Link>
+                    <Link to={`/${userType}/notifications`}>
+                        {location.includes('notifications') ?
+                            <AlertFilled /> : <Alert />
+                        }
+                    </Link>
+                    <Link to={`/${userType}/settings`}>
+                        {location.includes('settings') ?
+                            <UserFilled /> : <User />
+                        }
+                    </Link>
+                </div>
+            }
+        </section>
     );
 };
 
