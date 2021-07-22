@@ -9,7 +9,9 @@ type ModalDeleteType = {
         e: React.MouseEvent<
             SVGSVGElement | HTMLDivElement | HTMLButtonElement,
             MouseEvent
-        >
+        >,
+        confirmed?: boolean,
+        idBooking?: number
     ) => void;
 };
 
@@ -26,7 +28,10 @@ const ModalDelete = ({ room, onClick }: ModalDeleteType): JSX.Element => {
                 </div>
                 <h2>Souhaitez-vous annuler la réservation ?</h2>
                 <div className={styles.divider}></div>
-                <p className={styles.cancel} onClick={onClick}>
+                <p
+                    className={styles.cancel}
+                    onClick={(e) => onClick(e, true, room?.id_booking)}
+                >
                     Annuler la réservation
                 </p>
                 <button className={styles.keep} onClick={onClick}>

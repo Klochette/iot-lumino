@@ -39,7 +39,7 @@ const Router = (): JSX.Element => {
                 <Route exact path={"/:userType/rooms"}>
                     <PrivateRoute userType={userType} component={<Rooms />} />
                 </Route>
-                <Route exact path={"/:userType/rooms/:idRoom/book"}>
+                <Route exact path={"/:userType/rooms/:nameRoom/:idRoom/book"}>
                     <PrivateRoute
                         userType={userType}
                         component={<BookARoom />}

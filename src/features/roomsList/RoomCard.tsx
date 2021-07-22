@@ -95,7 +95,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                                 <>
                                     <p>Aucune réservation programmée</p>
                                     <Link
-                                        to={`/${userType}/rooms/${room.id_room}/book`}
+                                        to={`/${userType}/rooms/${room.nameRoom}/${room.id_room}/book`}
                                     >
                                         <button
                                             className={styles[addColor()]}
