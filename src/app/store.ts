@@ -4,12 +4,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { api } from "services/api/api";
 import switchTheme from "features/switchTheme/SwitchThemeSlice";
 import user from "features/user/userSlice";
+import lights from "features/lights/LightsSlice";
 
 export const store = configureStore({
     reducer: {
         [api.reducerPath]: api.reducer,
         switchTheme,
         user,
+        lights,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

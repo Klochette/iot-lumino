@@ -112,7 +112,7 @@ const StudentDashboard = (): JSX.Element => {
             )}
 
             {/* SALLE DIPONNIBLE A LA RESA */}
-            {isLoading && !room && (
+            {(isLoading || !room) && (
                 <>
                     <DashboardEmptyCard text="Aucune salle n'est réservable pour le moment" />
                 </>
