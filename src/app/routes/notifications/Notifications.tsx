@@ -120,12 +120,12 @@ const Notifications = (): JSX.Element => {
                 {notif
                     .filter((room) => !room.new)
                     .map((el) => (
-                        <div>
+                        <div key={el.id}>
                             <div className={styles.notificationCard}>
                                 {el.picture ? (
                                     <img
                                         className={styles.profilPic}
-                                        alt="photo de profil"
+                                        alt="de profil"
                                         src={bastien}
                                     />
                                 ) : (
