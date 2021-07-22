@@ -11,7 +11,6 @@ import DashboardAvailableRooms from "commons/dashboardAvailableRooms/DashboardAv
 import { QueryRoomType, RoomType } from "types";
 
 const StudentDashboard = (): JSX.Element => {
-    //const { data: rooms, isLoading: isLoadingRooms } = useApiRoomsQuery(skipToken);
     const [open, setOpen] = useState(false);
 
     const isLoadingRooms = false;
