@@ -18,6 +18,7 @@ import RoomsList from "features/roomsList/RoomsList";
 const StudentDashboard = (): JSX.Element => {
     const { userType } = useParams<{ userType?: "student" | "admin" }>();
     const { data, isLoading } = useApiRoomsQuery(undefined, {skip: !userType});
+
     const [open, setOpen] = useState(false);
 
     const [room, setRoom] = useState(data?.data);

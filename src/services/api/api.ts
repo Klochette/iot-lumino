@@ -28,6 +28,9 @@ export const api = createApi({
             query: (queryArg) =>
                 `/removeABooking/${queryArg.idBooking}/${queryArg.idRoom}`,
         }),
+        apiGetRoom: builder.query({
+            query: (roomId) => `/getRoomInfoByIdRoom/${roomId}`,
+        }),
     }),
 });
 
@@ -36,6 +39,7 @@ export const {
     useApiBookingFromARoomQuery,
     useApiGetBokingByRoomIdQuery,
     useApiDeleteBookingQuery,
+    useApiGetRoomQuery,
     //POST
     useApiBookARoomMutation,
 } = api;

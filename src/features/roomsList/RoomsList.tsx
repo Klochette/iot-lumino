@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { skipToken } from "@reduxjs/toolkit/dist/query";
-
 import { FilterType, RoomType, UserType } from "types";
 
 import { useApiRoomsQuery } from "services/api/api";
@@ -43,7 +41,9 @@ const sortRoom = (rooms: RoomType[], filter: FilterType) => {
 };
 
 const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
-    const { data, isLoading } = useApiRoomsQuery(undefined, {skip: !userType});
+    const { data, isLoading } = useApiRoomsQuery(undefined, {
+        skip: !userType,
+    });
 
     const [roomsToChange, setRoomsToChange] = useState<number[]>([]);
     const [open, setOpen] = useState(false);
@@ -162,10 +162,12 @@ const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
                         rooms={roomsToChange}
                     />
                 )}
-                <FloatingButtonTemperature
-                    disabled={roomsToChange.length < 1 ?? true}
-                    onClick={handleOpen}
-                />
+                {userType === "admin" && (
+                    <FloatingButtonTemperature
+                        disabled={roomsToChange.length < 1 ?? true}
+                        onClick={handleOpen}
+                    />
+                )}
                 {confirmed && <ModalConfirmed />}
             </div>
         </>
