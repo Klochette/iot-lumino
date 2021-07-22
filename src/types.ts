@@ -23,6 +23,7 @@ export type RoomType = {
     nbPlace: number;
     freeAccess: boolean;
     building: string;
+    id_booking: number;
 };
 
 export type QueryRoomType = {

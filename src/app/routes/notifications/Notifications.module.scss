@@ -48,6 +48,12 @@
         justify-content: space-between;
         position: relative;
         box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.09);
+
+        .notificationImage {
+            width: 45px;
+            height: auto;
+            margin-right: 5px;
+        }
     }
 
     .cardRoom {
@@ -72,10 +78,12 @@
         .cardMessage {
             @include text-style($text);
             padding-bottom: 5px;
+            padding-left: 0.5rem;
         }
 
         .cardTime {
             @include text-style($blue_light);
+            padding-left: 0.5rem;
         }
     }
 
