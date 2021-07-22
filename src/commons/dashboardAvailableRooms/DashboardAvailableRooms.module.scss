@@ -1,14 +1,37 @@
 @import "./../../scss/styles.scss";
 
-.containerAvailableRoom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 4px;
 
-    .availableRoom {
-        width: 55px;
-        height: 55px;
+.titleWrap {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+    .chevron {
+        margin-left: 0.3rem;
+        width: 5px;
+        height: auto;
+        path {
+            fill: $grey-light;
+        }
+    }
+}
+
+.containerAvailableRoom, .containerFreeAccessRoom {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    overflow: scroll;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+        
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .availableRoom, .freeAccessRoom {
+        padding: 1.7rem;
         background-color: $green-dark;
         border-radius: 9px;
         position: relative;
@@ -24,6 +47,7 @@
 }
 
 .containerFreeAccessRoom {
+    margin-bottom: 0rem;
     .freeAccessRoom {
         background-color: $yellow;
     }
