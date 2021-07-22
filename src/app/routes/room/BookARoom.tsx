@@ -14,22 +14,18 @@ import { useHistory, useParams } from "react-router-dom";
 import { UserType } from "types";
 
 const BookARoom = (): JSX.Element => {
-    const { userType, idRoom } =
-        useParams<{ userType?: UserType; idRoom?: string }>();
+    const { userType, idRoom, nameRoom } =
+        useParams<{ userType?: UserType; idRoom: string; nameRoom: string }>();
     const { data, isLoading } = useApiGetBokingByRoomIdQuery(idRoom);
     const { data: roomData, isLoading: isRoomLoading } =
         useApiGetRoomQuery(idRoom);
 
-    console.log(roomData);
-    console.log(data);
     const history = useHistory();
     const [bookARoomPost] = useApiBookARoomMutation();
     const [isBooked, setIsBooked] = useState(data?.data);
 
     const [start, setStart] = useState<number | undefined>();
     const [end, setEnd] = useState<number | undefined>();
-
-    console.log(isBooked);
 
     const bookARoom = async () => {
         try {
@@ -41,7 +37,7 @@ const BookARoom = (): JSX.Element => {
                     end: b
                         ? (Number(b) + 1).toString()
                         : (Number(a) + 1).toString(),
-                    nameRoom: "B111",
+                    nameRoom: nameRoom,
                     studentEmail: "nawel.borini@hetic.net",
                 };
                 await bookARoomPost(booking)
@@ -58,7 +54,6 @@ const BookARoom = (): JSX.Element => {
     };
 
     const [error, setError] = useState<Boolean | undefined>(false);
-    console.log(start, end);
     const fixStartEnd = (int: any) => {
         if (start !== undefined && Number(int) > start) {
             setEnd(int);

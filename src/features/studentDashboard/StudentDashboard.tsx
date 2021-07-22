@@ -22,12 +22,12 @@ const StudentDashboard = (): JSX.Element => {
     const { data, isLoading } = useApiRoomsQuery(undefined, {
         skip: !userType,
     });
-    const { data: dataBooking, isLoading: isLoadingBooking } =
+    const { data: dataBooking, refetch: refetchBooking } =
         useApiGetBookingByEmailQuery(email);
-    const [deleteBooking] = useApiDeleteBookingMutation();
+    const [deleteBooking, { isLoading: isLoadingDelete }] =
+        useApiDeleteBookingMutation();
 
     const [open, setOpen] = useState(false);
-    const [wait, setWait] = useState(false);
 
     const [room, setRoom] = useState(data?.data);
 
@@ -36,6 +36,8 @@ const StudentDashboard = (): JSX.Element => {
             setRoom(data.data);
         }
     }, [data]);
+
+    useEffect(() => refetchBooking(), [refetchBooking]);
 
     //@ts-ignore
     const availableRooms: RoomType[] | undefined =
@@ -51,26 +53,20 @@ const StudentDashboard = (): JSX.Element => {
         }
     };
 
-    const deleteBookingFunction = async (bookingId: number) => {
-        const booking = bookingId.toString();
-        const bookingToDelete = { booking };
-        try {
-            await deleteBooking(bookingToDelete)
-                .unwrap()
-                .then(() => setWait(false));
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     const handleClose = async (
         e: any,
         confirmed?: boolean,
         bookingId?: number
     ) => {
         if (confirmed && bookingId) {
-            setWait(true);
-            await deleteBookingFunction(bookingId);
+            const booking = bookingId.toString();
+            try {
+                await deleteBooking({ idBooking: booking })
+                    .unwrap()
+                    .then((fulfilled) => fulfilled && refetchBooking());
+            } catch (error) {
+                console.log(error);
+            }
         }
         if (open) {
             setOpen(false);
@@ -155,6 +151,7 @@ const StudentDashboard = (): JSX.Element => {
                     room={room && dataBooking.data[0]}
                 />
             )}
+            {isLoadingDelete && <Loader />}
         </>
     );
 };

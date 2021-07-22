@@ -12,6 +12,7 @@ import RoomTemperaturesList from "./RoomTemperaturesList";
 import ModalEditTemperature from "features/modalEditTemperature/ModalEditTemperature";
 import FloatingButtonTemperature from "commons/floatingButtonTemperature/FloatingButtonTemperature";
 import ModalConfirmed from "features/modalConfirmed/ModalModalConfirmed";
+import { useEffect } from "react";
 
 type RoomsListType = {
     filter: FilterType | undefined;
@@ -41,7 +42,7 @@ const sortRoom = (rooms: RoomType[], filter: FilterType) => {
 };
 
 const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
-    const { data, isLoading } = useApiRoomsQuery(undefined, {
+    const { data, isLoading, refetch } = useApiRoomsQuery(undefined, {
         skip: !userType,
     });
 
@@ -87,6 +88,10 @@ const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
             setOpen(true);
         }
     };
+
+    useEffect(() => {
+        refetch();
+    }, []);
 
     const filteredRooms = filter && data && sortRoom([...data.data], filter);
     const getKeys = [];

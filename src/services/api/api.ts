@@ -35,7 +35,7 @@ export const api = createApi({
             query: (roomId) => `/getRoomInfoByIdRoom/${roomId}`,
         }),
         apiGetBookingByEmail: builder.query({
-            query: (email) => `getBookingByEmail/${email}`,
+            query: (email) => `/getBookingByEmail/${email}`,
         }),
     }),
 });
