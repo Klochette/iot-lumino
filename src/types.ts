@@ -24,6 +24,7 @@ export type RoomType = {
     freeAccess: boolean;
     building: string;
     id_booking: number;
+    Temperature: number;
 };
 
 export type QueryRoomType = {

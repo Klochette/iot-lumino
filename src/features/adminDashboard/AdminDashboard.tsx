@@ -7,12 +7,15 @@ import { CircleSlider } from "react-circle-slider";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/store";
 import { toogleLight } from "features/lights/LightsSlice";
+import ModalConfirmed from "features/modalConfirmed/ModalModalConfirmed";
 
 const AdminDashboard = (): JSX.Element => {
     const [value, setValue] = useState(0);
     const dispatch = useAppDispatch();
     const { isOn } = useAppSelector((state) => state.lights);
-    const [counter, setCounter] = useState(6);
+    const [counter, setCounter] = useState(4);
+
+    const [confirmed, setConfirmed] = useState(false);
 
     const onChangeValue = (e: number) => {
         setValue(e);
@@ -33,7 +36,7 @@ const AdminDashboard = (): JSX.Element => {
             dispatch(toogleLight());
             //@ts-ignore
             clearInterval(countRef.current);
-            setCounter(6);
+            setCounter(4);
         }, 5000);
     };
 
@@ -42,25 +45,25 @@ const AdminDashboard = (): JSX.Element => {
             <DashboardAdminCard variant="dark">
                 <>
                     <div className={styles.turnOffLights}>
-                        {isOn && counter === 6 && (
+                        {isOn && counter === 4 && (
                             <>
                                 <h2>Éteindre toutes les lumières ?</h2>
                                 <button onClick={handleLights}>Éteindre</button>
                             </>
                         )}
-                        {!isOn && counter === 6 && (
+                        {!isOn && counter === 4 && (
                             <>
                                 <h2>Allumer toutes les lumières ?</h2>
                                 <button onClick={handleLights}>Allumer</button>
                             </>
                         )}
-                        {isOn && counter !== 6 && counter !== 0 && (
+                        {isOn && counter !== 4 && counter !== 0 && (
                             <h2>
                                 Toutes les lumières vont s'éteindre dans{" "}
                                 <span>{counter}</span>s
                             </h2>
                         )}
-                        {!isOn && counter !== 6 && counter !== 0 && (
+                        {!isOn && counter !== 4 && counter !== 0 && (
                             <h2>
                                 Toutes les lumières vont s'allumer dans{" "}
                                 <span>{counter}</span>s
@@ -87,7 +90,14 @@ const AdminDashboard = (): JSX.Element => {
                         onChange={onChangeValue}
                     />
                 </div>
-                <button>Confirmer</button>
+                <button
+                    onClick={() => {
+                        setConfirmed(true);
+                        setTimeout(() => setConfirmed(false), 1500);
+                    }}
+                >
+                    Confirmer
+                </button>
             </DashboardAdminCard>
             <DashboardAdminCard variant="light">
                 <h2>Paramètres des salles</h2>
@@ -95,6 +105,7 @@ const AdminDashboard = (): JSX.Element => {
                     <button>Configurer</button>
                 </Link>
             </DashboardAdminCard>
+            {confirmed && <ModalConfirmed />}
         </>
     );
 };

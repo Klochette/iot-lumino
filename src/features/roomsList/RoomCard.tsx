@@ -51,7 +51,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
             return "yellow";
         } else {
             //@ts-ignore
-            if (isBooked || isFullBooked) {
+            if (isBooked || isFullBooked || room.nbPlace === 0) {
                 return "red";
             } else {
                 return "green";
@@ -78,7 +78,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                                 styles[addColor()]
                             )}
                         >
-                            <h2>?/{nbPlace}</h2>
+                            <h2>{nbPlace}/50</h2>
                             {isOpen && <ArrowUp className={styles.icon} />}
                             {!isOpen && <ArrowDown />}
                         </div>
