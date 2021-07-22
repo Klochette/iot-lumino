@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Settings.module.scss";
 import { ReactComponent as Pdp } from "assets/images/pdp.svg";
-import { useAppSelector } from "app/store";
+import { useAppDispatch, useAppSelector } from "app/store";
 import Switch from "commons/switch/Switch";
 
 import { ReactComponent as LuminoLogo } from "assets/images/logoLumino.svg";
@@ -13,9 +13,12 @@ import { ReactComponent as MobileSvg } from "assets/images/mobile-svg.svg";
 import { ReactComponent as EmailSvg } from "assets/images/email-svg.svg";
 import { ReactComponent as CGUSvg } from "assets/images/cgu-svg.svg";
 import { ReactComponent as ConfSvg } from "assets/images/config-svg.svg";
+import { logout } from "features/user/userSlice";
 
 const Settings = (): JSX.Element => {
     const { identifier, email } = useAppSelector((state) => state.user);
+    const dispatch = useAppDispatch();
+
     return (
         <section className={styles.container}>
             <div className={styles.header}>
@@ -89,7 +92,10 @@ const Settings = (): JSX.Element => {
                         <RightArrow />
                     </div>
                 </div>
-                <div className={styles.disconnect}>
+                <div
+                    className={styles.disconnect}
+                    onClick={() => dispatch(logout())}
+                >
                     <p>Se déconnecter</p>
                 </div>
                 <div className={styles.credits}>

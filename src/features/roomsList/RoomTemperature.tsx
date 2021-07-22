@@ -7,11 +7,24 @@ import { RoomType } from "types";
 import { useApiBookingFromARoomQuery } from "services/api/api";
 
 import styles from "features/roomsList/RoomTemperature.module.scss";
+import { useEffect } from "react";
 
-type RoomProps = { room: RoomType; key: number };
+type RoomProps = {
+    room: RoomType;
+    onChange: (id: number, status: boolean) => void;
+    selected: number | undefined;
+};
 
-const RoomTemperatureCards = ({ room, key }: RoomProps): JSX.Element => {
-    const [isChecked, setIsChecked] = useState(false);
+const RoomTemperatureCards = ({
+    room,
+    onChange,
+    selected,
+}: RoomProps): JSX.Element => {
+    const [isChecked, setIsChecked] = useState(selected ? true : false);
+
+    useEffect(() => {
+        setIsChecked(selected ? true : false);
+    }, [selected]);
 
     const { nameRoom, freeAccess, id_room } = room;
 
@@ -32,14 +45,25 @@ const RoomTemperatureCards = ({ room, key }: RoomProps): JSX.Element => {
 
     return (
         <div
-            key={id_room}
+            onClick={() => {
+                setIsChecked(!isChecked);
+                onChange(room.id_room, !isChecked);
+            }}
             className={clsx(styles.temperaturesCards, styles[addColor()])}
         >
             <h2>{nameRoom}</h2>
             <h1 className={styles.temperature}>21°</h1>
             <div>
                 <div className={styles.round}>
-                    <input type="checkbox" id={id_room.toString()} />
+                    <input
+                        type="checkbox"
+                        id={id_room.toString()}
+                        checked={isChecked}
+                        onChange={() => {
+                            setIsChecked(!isChecked);
+                            onChange(room.id_room, !isChecked);
+                        }}
+                    />
                     <label htmlFor={id_room.toString()}></label>
                 </div>
             </div>

@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { skipToken } from "@reduxjs/toolkit/dist/query";
-import clsx from "clsx";
 
-import { FilterType, QueryRoomType, RoomType, UserType } from "types";
+import { FilterType, RoomType, UserType } from "types";
 
 import { useApiRoomsQuery } from "services/api/api";
 import RoomCard from "features/roomsList/RoomCard";
 
 import styles from "features/roomsList/RoomsList.module.scss";
 import Loader from "commons/loader/Loader";
-import { Link } from "react-router-dom";
-import { ReactComponent as CheckedIcon } from "assets/images/checkedIconWhite.svg";
 
-import { CircleSlider } from "react-circle-slider";
-import RoomTemperatureCards from "./RoomTemperature";
+import RoomTemperaturesList from "./RoomTemperaturesList";
+import ModalEditTemperature from "features/modalEditTemperature/ModalEditTemperature";
+import FloatingButtonTemperature from "commons/floatingButtonTemperature/FloatingButtonTemperature";
+import ModalConfirmed from "features/modalConfirmed/ModalModalConfirmed";
 
 type RoomsListType = {
     filter: FilterType | undefined;
@@ -44,84 +43,49 @@ const sortRoom = (rooms: RoomType[], filter: FilterType) => {
 };
 
 const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
-    const { isLoading } = useApiRoomsQuery(skipToken);
-    const data: QueryRoomType = {
-        data: [
-            // freeAccess
-            {
-                id_room: 2,
-                isBooked: false,
-                nameRoom: "A101",
-                nbPlace: 20,
-                freeAccess: true,
-                building: "A",
-            },
-            {
-                id_room: 3,
-                isBooked: true,
-                nameRoom: "A102",
-                nbPlace: 20,
-                freeAccess: true,
-                building: "A",
-            },
-            {
-                id_room: 4,
-                isBooked: false,
-                nameRoom: "A103",
-                nbPlace: 20,
-                freeAccess: true,
-                building: "A",
-            },
-            {
-                id_room: 6,
-                isBooked: false,
-                nameRoom: "A106",
-                nbPlace: 20,
-                freeAccess: true,
-                building: "A",
-            },
-            // available
-            {
-                id_room: 5,
-                isBooked: false,
-                nameRoom: "A104",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "A",
-            },
-            {
-                id_room: 1,
-                isBooked: false,
-                nameRoom: "A105",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "A",
-            },
-            {
-                id_room: 7,
-                isBooked: false,
-                nameRoom: "A107",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "A",
-            },
-            {
-                id_room: 8,
-                isBooked: false,
-                nameRoom: "A108",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "A",
-            },
-            {
-                id_room: 9,
-                isBooked: false,
-                nameRoom: "A109",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "B",
-            },
-        ],
+    const { data, isLoading } = useApiRoomsQuery(skipToken);
+
+    const [roomsToChange, setRoomsToChange] = useState<number[]>([]);
+    const [open, setOpen] = useState(false);
+    const [confirmed, setConfirmed] = useState(false);
+
+    const setRoomsForTemperatureChange = (id: number, status: boolean) => {
+        const toFind = roomsToChange?.find((idRoom) => idRoom === id);
+        if (status && !toFind) {
+            const newRoomsToChange = [...roomsToChange];
+            newRoomsToChange.push(id);
+            setRoomsToChange(newRoomsToChange);
+        } else if (!status && toFind) {
+            const newRoomsToChange = roomsToChange.filter(
+                (roomId) => roomId !== id
+            );
+            setRoomsToChange(newRoomsToChange);
+        }
+    };
+
+    const handleClose = (
+        e: React.MouseEvent<
+            SVGSVGElement | HTMLDivElement | HTMLButtonElement,
+            MouseEvent
+        >,
+        confirm?: boolean
+    ) => {
+        if (open) {
+            if (confirm) {
+                setConfirmed(true);
+                setRoomsToChange([]);
+            }
+            setOpen(false);
+            setTimeout(() => {
+                setConfirmed(false);
+            }, 2000);
+        }
+    };
+
+    const handleOpen = () => {
+        if ((!open && roomsToChange.length >= 1) ?? true) {
+            setOpen(true);
+        }
     };
 
     const filteredRooms = filter && data && sortRoom([...data.data], filter);
@@ -135,62 +99,76 @@ const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
             getKeys.push(key);
     }
 
-    console.log(filteredRooms);
-
     return (
-        <div className={styles.roomsList}>
-            {isLoading && <Loader />}
-            {filter &&
-                getKeys.map((key) => (
-                    <div key={key}>
-                        <h2 className={styles.filterName}>
-                            {filter === "building" && `Bâtiment ${key}`}
-                            {filter === "freeAccess" && "Salles à accès libre"}
-                            {filter === "isBooked" && "Salles libres"}
-                        </h2>
-                        {userType === "student" &&
-                            filteredRooms[key].map((room: RoomType) => {
-                                return (
-                                    <RoomCard key={room.id_room} room={room} />
-                                );
-                            })}
-                        {userType === "admin" && filteredRooms && (
-                            <div className={styles.container}>
-                                {filteredRooms[key].map((room: RoomType) => {
+        <>
+            <div className={styles.roomsList}>
+                {isLoading && <Loader />}
+                {filter &&
+                    getKeys.map((key) => (
+                        <div key={key}>
+                            <h2 className={styles.filterName}>
+                                {filter === "building" && `Bâtiment ${key}`}
+                                {filter === "freeAccess" &&
+                                    "Salles à accès libre"}
+                                {filter === "isBooked" && "Salles libres"}
+                            </h2>
+                            {userType === "student" &&
+                                filteredRooms[key].map((room: RoomType) => {
                                     return (
-                                        <RoomTemperatureCards
-                                            room={room}
+                                        <RoomCard
                                             key={room.id_room}
+                                            room={room}
                                         />
                                     );
                                 })}
-                            </div>
-                        )}
-                    </div>
-                ))}
-            {!filter &&
-                data &&
-                userType === "student" &&
-                data.data.map((room: RoomType) => {
-                    return <RoomCard room={room} key={room.id_room} />;
-                })}
-            {!filter && data && userType === "admin" && (
-                <div className={styles.container}>
-                    {data.data.map((room: RoomType) => {
-                        return (
-                            <RoomTemperatureCards
-                                room={room}
-                                key={room.id_room}
-                            />
-                        );
+                            {userType === "admin" && (
+                                <RoomTemperaturesList
+                                    selectedRooms={roomsToChange}
+                                    className={styles.container}
+                                    onChange={(id, status) => {
+                                        setRoomsForTemperatureChange(
+                                            id,
+                                            status
+                                        );
+                                    }}
+                                    keyRoom={key}
+                                    rooms={filteredRooms}
+                                />
+                            )}
+                        </div>
+                    ))}
+                {!filter &&
+                    data &&
+                    userType === "student" &&
+                    data.data.map((room: RoomType) => {
+                        return <RoomCard room={room} key={room.id_room} />;
                     })}
-                </div>
-            )}
-
-            {filter && getKeys.length === 0 && !isLoading && (
-                <p>Il n'y a pas de salles avec ce filtre.</p>
-            )}
-        </div>
+                {!filter && data && userType === "admin" && (
+                    <RoomTemperaturesList
+                        selectedRooms={roomsToChange}
+                        className={styles.container}
+                        onChange={(id, status) => {
+                            setRoomsForTemperatureChange(id, status);
+                        }}
+                        rooms={data.data}
+                    />
+                )}
+                {filter && getKeys.length === 0 && !isLoading && (
+                    <p>Il n'y a pas de salles avec ce filtre.</p>
+                )}
+                {open && (
+                    <ModalEditTemperature
+                        onClick={(e, confirm) => handleClose(e, confirm)}
+                        rooms={roomsToChange}
+                    />
+                )}
+                <FloatingButtonTemperature
+                    disabled={roomsToChange.length < 1 ?? true}
+                    onClick={handleOpen}
+                />
+                {confirmed && <ModalConfirmed />}
+            </div>
+        </>
     );
 };
 
