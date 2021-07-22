@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./Notifications.module.scss";
 import { ReactComponent as RedDots } from "assets/images/three-dots.svg";
+import bastien from "assets/images/bastien.png";
+
 import { useState } from "react";
 import ModalDeleteNotif from "features/modalDeleteNotif/ModalDeleteNotif";
 
@@ -20,6 +22,7 @@ const Notifications = (): JSX.Element => {
         {
             id: 1,
             room: "A005",
+            picture: bastien,
             title: " Bastien Baquier vous invite à rejoindre le groupe Fluxéo",
             time: "22h",
             new: false,
@@ -120,15 +123,23 @@ const Notifications = (): JSX.Element => {
                     .map((el, index) => (
                         <div>
                             <div className={styles.notificationCard}>
-                                <div
-                                    className={
-                                        el.isBooked
-                                            ? styles.cardRoom
-                                            : styles.cardRoomBooked
+                                
+                                        {el.picture ? 
+                                        <img
+                                        className={styles.profilPic}
+                                        alt="photo de profil"
+                                        src={bastien}
+                                        /> : 
+                                        <div
+                                        className={
+                                            el.isBooked
+                                                ? styles.cardRoom
+                                                : styles.cardRoomBooked
                                     }
-                                >
-                                    <p>{el.room}</p>
-                                </div>
+                                    >
+                                        <p>{el.room}</p>
+                                        </div>
+                                    }
                                 <div className={styles.cardRightBlock}>
                                     <p className={styles.cardMessage}>
                                         {el.title}
