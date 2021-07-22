@@ -7,6 +7,8 @@ import {
     useApiGetRoomQuery,
 } from "services/api/api";
 
+import Loader from "commons/loader/Loader";
+
 import clsx from "clsx";
 import { useHistory, useParams } from "react-router-dom";
 import { UserType } from "types";

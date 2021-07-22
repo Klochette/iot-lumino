@@ -99,7 +99,7 @@ const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
             getKeys.push(key);
     }
 
-    return (
+    return ( 
         <>
             <div className={styles.roomsList}>
                 {isLoading && <Loader />}

@@ -4,99 +4,50 @@ import { ReactComponent as CloseIcon } from "assets/images/close-circle.svg";
 import Loader from "commons/loader/Loader";
 import ModalDelete from "features/modalDelete/ModalDelete";
 import DashboardGroup from "../../commons/dashboardGroup/DashboardGroup";
-
-import { useState } from "react";
 import DashboardEmptyCard from "commons/dashboardEmptyCards/DashboardEmptyCards";
 import DashboardAvailableRooms from "commons/dashboardAvailableRooms/DashboardAvailableRooms";
-import { QueryRoomType, RoomType } from "types";
+
+import { useState, useEffect } from "react";
+import {useParams} from "react-router-dom";
+import { QueryRoomType, RoomType, UserType } from "types";
+
+import { useApiRoomsQuery } from "services/api/api";
+import RoomsList from "features/roomsList/RoomsList";
+
 
 const StudentDashboard = (): JSX.Element => {
+    const { userType } = useParams<{ userType?: "student" | "admin" }>();
+    const { data, isLoading } = useApiRoomsQuery(undefined, {skip: !userType});
+
     const [open, setOpen] = useState(false);
 
-    const isLoadingRooms = false;
-    const rooms: QueryRoomType = {
-        data: [
-            // freeAccess
-            {
-                id_room: 2,
-                isBooked: false,
-                nameRoom: "A101",
-                nbPlace: 20,
-                freeAccess: true,
-                building: "A",
-            },
-            {
-                id_room: 3,
-                isBooked: true,
-                nameRoom: "A102",
-                nbPlace: 20,
-                freeAccess: true,
-                building: "A",
-            },
-            {
-                id_room: 4,
-                isBooked: false,
-                nameRoom: "A103",
-                nbPlace: 20,
-                freeAccess: true,
-                building: "A",
-            },
-            {
-                id_room: 6,
-                isBooked: false,
-                nameRoom: "A106",
-                nbPlace: 20,
-                freeAccess: true,
-                building: "A",
-            },
-            // available
-            {
-                id_room: 5,
-                isBooked: false,
-                nameRoom: "A104",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "A",
-            },
-            {
-                id_room: 1,
-                isBooked: false,
-                nameRoom: "A105",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "A",
-            },
-            {
-                id_room: 7,
-                isBooked: false,
-                nameRoom: "A107",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "A",
-            },
-            {
-                id_room: 8,
-                isBooked: false,
-                nameRoom: "A108",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "A",
-            },
-            {
-                id_room: 9,
-                isBooked: false,
-                nameRoom: "A109",
-                nbPlace: 20,
-                freeAccess: false,
-                building: "A",
-            },
-        ],
-    };
+    const [room, setRoom] = useState(data?.data);
 
-    const availableRooms: RoomType[] | undefined = rooms?.data.filter(
+    useEffect(() =>  {
+        if(data && data.data){
+            setRoom(data.data)
+            console.log(data?.data);
+        }
+    }, [data])
+
+    
+
+
+    const isLoadingRooms = false;
+    // const rooms: QueryRoomType = {
+    //     data: [
+    //         // freeAccess
+    //         room
+    //     ],
+    // };
+
+    //@ts-ignore
+    const availableRooms: RoomType[] | undefined = room && room.filter(
         (room) => !room.isBooked && !room.freeAccess
     );
-    const freeAccessRooms: RoomType[] | undefined = rooms?.data.filter(
+
+    //@ts-ignore
+    const freeAccessRooms: RoomType[] | undefined = room && room.filter(
         (room) => room.freeAccess && !room.isBooked
     );
 
@@ -115,11 +66,12 @@ const StudentDashboard = (): JSX.Element => {
     return (
         <>
             {/* SALLE RESERVEE */}
+            
             <div className={styles.cardHome}>
                 <h2>Salle réservée</h2>
                 <div className={styles.containerBookedRoom}>
                     <div className={styles.bookedRoomImg}>
-                        <p>{rooms.data[0].nameRoom}</p>
+                        <p>{room ? room[0].nameRoom : 'API down'}</p>
                         <CloseIcon
                             className={styles.closeIcon}
                             onClick={handleOpen}
@@ -137,8 +89,9 @@ const StudentDashboard = (): JSX.Element => {
             </div>
 
             {/* SALLE DIPONNIBLE A LA RESA */}
-            {!isLoadingRooms && (
-                <div className={styles.cardHome}>
+            <div className={styles.cardHome}>
+                {isLoading && <Loader />}
+                <div>
                     <DashboardAvailableRooms
                         rooms={availableRooms}
                         type="available"
@@ -152,7 +105,7 @@ const StudentDashboard = (): JSX.Element => {
                         error="Aucune salle à accès libre n'est disponible"
                     />
                 </div>
-            )}
+            </div>
             {isLoadingRooms && <Loader />}
 
             {/* GROUP */}
@@ -169,7 +122,7 @@ const StudentDashboard = (): JSX.Element => {
             />
 
             {open && (
-                <ModalDelete onClick={handleClose} room={rooms?.data[0]} />
+                <ModalDelete onClick={handleClose} room={room && room[0]} />
             )}
         </>
     );
