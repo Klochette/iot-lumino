@@ -43,12 +43,6 @@ const Rooms = (): JSX.Element => {
                         labelFor="freeAccess"
                         label="Accès libre"
                     />
-                    <ButtonChecked
-                        onClick={handleFilterClick}
-                        checked={filter === "isBooked"}
-                        labelFor="free"
-                        label="Libres"
-                    />
                 </div>
                 {<RoomsList filter={filter} userType={userType} />}
             </div>
