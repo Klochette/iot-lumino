@@ -124,7 +124,6 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                                     </Link>
                                 </>
                             )}
-                            {console.log(data?.status)}
                             {!isEmpty && (
                                 <>
                                     <ul>
