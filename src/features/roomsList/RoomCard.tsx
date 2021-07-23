@@ -15,6 +15,7 @@ import { ReactComponent as ArrowUp } from "assets/images/bi_three-dots.svg";
 import { ReactComponent as ArrowDown } from "assets/images/arrowDown.svg";
 import { Link, useParams } from "react-router-dom";
 import Loader from "commons/loader/Loader";
+import { useEffect } from "react";
 
 type RoomProps = { room: RoomType };
 
@@ -26,8 +27,11 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
         room;
 
     const { data, isLoading, refetch } = useApiBookingFromARoomQuery(nameRoom);
-    const { data: roomBooking, isLoading: roomBookingLoading } =
-        useApiGetBokingByRoomIdQuery(id_room);
+    const {
+        data: roomBooking,
+        isLoading: roomBookingLoading,
+        refetch: refetchBooking,
+    } = useApiGetBokingByRoomIdQuery(id_room);
     const getIsFullBooked = () => {
         if (roomBooking && roomBooking.data)
             for (const key in roomBooking.data) {
@@ -60,10 +64,21 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
         }
     };
 
+    useEffect(() => {
+        refetch();
+        refetchBooking();
+    }, []);
+
     return (
         <>
             {!isLoading && !roomBookingLoading && (
-                <div className={styles.accordion} onClick={() => refetch()}>
+                <div
+                    className={styles.accordion}
+                    onClick={() => {
+                        refetch();
+                        refetchBooking();
+                    }}
+                >
                     <div
                         className={clsx(
                             styles.title,
@@ -109,6 +124,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                                     </Link>
                                 </>
                             )}
+                            {console.log(data?.status)}
                             {!isEmpty && (
                                 <>
                                     <ul>
