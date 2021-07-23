@@ -40,6 +40,10 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
         return true;
     };
 
+    useEffect(() => {
+        refetch();
+    }, []);
+
     const getIsEmpty = () => {
         if (roomBooking && roomBooking.data)
             for (const key in roomBooking.data) {
