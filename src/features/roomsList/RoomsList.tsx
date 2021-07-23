@@ -12,7 +12,6 @@ import RoomTemperaturesList from "./RoomTemperaturesList";
 import ModalEditTemperature from "features/modalEditTemperature/ModalEditTemperature";
 import FloatingButtonTemperature from "commons/floatingButtonTemperature/FloatingButtonTemperature";
 import ModalConfirmed from "features/modalConfirmed/ModalModalConfirmed";
-import { useEffect } from "react";
 
 type RoomsListType = {
     filter: FilterType | undefined;

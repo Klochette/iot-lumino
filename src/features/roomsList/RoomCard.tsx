@@ -15,7 +15,6 @@ import { ReactComponent as ArrowUp } from "assets/images/bi_three-dots.svg";
 import { ReactComponent as ArrowDown } from "assets/images/arrowDown.svg";
 import { Link, useParams } from "react-router-dom";
 import Loader from "commons/loader/Loader";
-import { useEffect } from "react";
 
 type RoomProps = { room: RoomType };
 
