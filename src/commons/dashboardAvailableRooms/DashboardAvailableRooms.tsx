@@ -4,6 +4,7 @@ import styles from "./DashboardAvailableRooms.module.scss";
 import { ReactComponent as RightArrow } from "assets/images/right-arrow.svg";
 
 import { RoomType } from "types";
+import { Link } from "react-router-dom";
 
 type DashboardAvailableRoomsType = {
     rooms?: RoomType[];
@@ -34,17 +35,25 @@ const DashboardAvailableRooms = ({
                 >
                     {rooms.map((room) => {
                         return (
-                            <div key={room.id_room}>
-                                <div
-                                    className={
-                                        type === "available"
-                                            ? styles.availableRoom
-                                            : styles.freeAccessRoom
-                                    }
-                                >
-                                    <p>{room.nameRoom}</p>
+                            <Link
+                                to={
+                                    type === "available"
+                                        ? `/student/rooms/${room.nameRoom}/${room.id_room}/book`
+                                        : `/student/dashboard`
+                                }
+                            >
+                                <div key={room.id_room}>
+                                    <div
+                                        className={
+                                            type === "available"
+                                                ? styles.availableRoom
+                                                : styles.freeAccessRoom
+                                        }
+                                    >
+                                        <p>{room.nameRoom}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         );
                     })}
                 </div>

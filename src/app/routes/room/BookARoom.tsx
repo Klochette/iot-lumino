@@ -18,9 +18,13 @@ const BookARoom = (): JSX.Element => {
     const { userType, idRoom, nameRoom } =
         useParams<{ userType?: UserType; idRoom: string; nameRoom: string }>();
     const { email } = useAppSelector((state) => state.user);
-    const { data, isLoading } = useApiGetBokingByRoomIdQuery(idRoom);
+    const { data, isLoading, refetch } = useApiGetBokingByRoomIdQuery(idRoom);
     const { data: roomData, isLoading: isRoomLoading } =
         useApiGetRoomQuery(idRoom);
+
+    useEffect(() => {
+        refetch();
+    });
 
     const history = useHistory();
     const [bookARoomPost, { isLoading: isLoadingBookARomm }] =
