@@ -126,7 +126,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
                                                 <li key={booking.id_booking}>
                                                     Réservée de :{" "}
                                                     {booking.start}h à{" "}
-                                                    {Number(booking.end) - 1}h
+                                                    {booking.end}h
                                                 </li>
                                             ))}
                                         {isLoading &&
