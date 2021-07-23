@@ -42,7 +42,7 @@ const sortRoom = (rooms: RoomType[], filter: FilterType) => {
 };
 
 const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
-    const { data, isLoading, refetch } = useApiRoomsQuery(undefined, {
+    const { data, isLoading } = useApiRoomsQuery(undefined, {
         skip: !userType,
     });
 
@@ -88,10 +88,6 @@ const RoomsList = ({ filter, userType }: RoomsListType): JSX.Element => {
             setOpen(true);
         }
     };
-
-    useEffect(() => {
-        refetch();
-    }, [refetch]);
 
     const filteredRooms = filter && data && sortRoom([...data.data], filter);
     const getKeys = [];

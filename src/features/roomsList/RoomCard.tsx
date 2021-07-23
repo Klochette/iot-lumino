@@ -64,11 +64,6 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
         }
     };
 
-    useEffect(() => {
-        refetch();
-        refetchBooking();
-    }, []);
-
     return (
         <>
             {!isLoading && !roomBookingLoading && (
