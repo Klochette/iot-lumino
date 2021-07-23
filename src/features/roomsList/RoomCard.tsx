@@ -52,7 +52,7 @@ const RoomCard = ({ room }: RoomProps): JSX.Element => {
     const isEmpty = getIsEmpty();
 
     const addColor = () => {
-        if (freeAccess) {
+        if (freeAccess && !isFullBooked) {
             return "yellow";
         } else {
             //@ts-ignore
